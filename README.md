@@ -1,5 +1,6 @@
   # DSA_Supereme
-# **#ASLI CODING** 
+# **#ASLI CODING**
+## **DEVELOPING OBSERVATION SKILLS, THINKING SKILLS**
 
 ### BASICS 
     1. WHAT IS A FACTOR OF N?
@@ -27,7 +28,7 @@
                             for var i ==> 1 to N. 
                                                             // now i want to check weather i is a factor of N or not. how to do? 
                             if N % i == 0.                  // % will give the remainder so, if the remainder is 0 that means i is a factor of N.
-                                factor += 1                 
+                                factor += 1                 // factor are not in pair so, we will increment the factor by 1.
                         return factor   
                         }
             HOW MANY NUMBER OF TIMES THE LOOP WILL TAKE ? 
@@ -52,7 +53,7 @@
 
                     SO --> if gaurav want to see the output he can't see if his machine taking 317 years to execute the code. so the code for count() function is not useful. 
 
-`````` FASTER THE THINGS,  BETTER THE THINGS. ``````     
+`````` FASTER THE THINGS,  BETTER THE THINGS. {POWER OF THINKING, FINDING THE PATTERNS} `` ``````     
 
         1.2  WHY WE NEED OPTIMISATION ?  
             ANS --> Optimising the code means, ** converting the same piece of code into something which will gives exact same result but faster means, takes LESS NUMBER OF ITERATIONS. **
@@ -127,6 +128,22 @@
                                                 return factors;
                                         }
                                                     // No. of iteration will remain sqrt(N). ==> optimised code.
+                                // the above code means, we have an factors in the pair so we are adding 2 factors for each a.(a & N/a). eg ==> 10 facotrs
+                                // but when we have only 1 factor then we have to add only 1 factor. (both a & N/a are same) eg ==> 100 factors. 
+            
+            NEW PROGRAMMER --> when we new programmer we don't know how to find the sqrt(N). then what is the solution? 
+            ANS --> N = 100, sqrt(N) = 10.
+            EG --> for(a = 1; a <= sqrt(N); a++) ==> sqrt(N) like 1, 2, 3, 4, 5, stop at 6.
+                             ||
+                    a * a <= N ==> 1*1 = 1, 2*2 = 4, 3*3 = 9, 4*4 = 16, 5*5 = 25, stop at 6*6 = 36.
+            
+            SUMMARISE --> N = 10^18  iterations, if we write simple code in gaurav machine it was taking 317 years to run the code.
+            NOW -->     N = 10^18 ==> sqrt(10^18) ==> 10^9 iterations, 
+            SO --> 10^8 = 1 second. * 10^1 = 10 second 
+            CONSLUSION --> SO WHEN WE WRITE THE SOLUTION IF THERE IS AN SCOPE OF OPTIMISATION THEN WE HAVE TO FIGURE OUT WITH THE SMALL SAMLL INPUTS, SOME 
+                           SOME OBSERVATIONS THAT CAN GET YOU TO OPTIMISED SOLUTION.
+
+            FINALLY --> 317 years to 10 second.     // extermely optimised code.
                                                         
 
 ``````
