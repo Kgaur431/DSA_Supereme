@@ -1,6 +1,7 @@
   # DSA_Supereme
 # **#ASLI CODING**
 ## **DEVELOPING OBSERVATION SKILLS, THINKING SKILLS**
+### ***IF WE OBSERVE THINGS, WE CAN DO THINGS***
 
 ### BASICS 
     1. WHAT IS A FACTOR OF N?
@@ -67,6 +68,11 @@
                        a * b   = N
                     1. 1 * 10  = 10     2 factors
                     2. 2 * 5   = 10     2 factors
+                                                                    // if we write any number into a * b form. obiously 1 number will be smaller than other. like 10 ==> 2 * 5.
+                                                                    // so, in our case a is smaller number and b is larger number. but we can write b < a also. then,
+                                                                    //      b * a   = N
+                                                                    //   1. 1 * 10  = 10     2 factors
+                                                                    //   2. 2 * 5   = 10     2 factors  ==> any 1 number can be smaller than other.
             EG 2 --> N = 100 { 1, 2, 4, 5, 10, 20, 25, 50, 100 }
             REPRESENTS --> means represents the factor in ** pairs of any number **
                        a * b   = N
@@ -144,6 +150,80 @@
                            SOME OBSERVATIONS THAT CAN GET YOU TO OPTIMISED SOLUTION.
 
             FINALLY --> 317 years to 10 second.     // extermely optimised code.
+
+````    
+        1.4 SUM OF NATURAL NUMBERS
+            1.4.1 SUM OF NATURAL NUMBERS TILL 10 ?
+                  ANS --> 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 = 55
+                           1 + 2 + 3 + 4 + ... + N = 55
+            1.4.2 SUM OF NATURAL NUMBER TILL 100 ?
+                  ANS --> 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12  +.............+  92 + 93 + 94 + 95 + 96 + 97 + 98 + 99 + 100 = 5050
+                  GAUS'S FORMULA --> 5050 = 100 * 101 / 2
+                  QUES --> HOW GAUS'S OBSERVED? 
+                  OBSERVATION --> HOW TO FIND THE NATURAL NUMBERS
+                  EG --> S = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + ........+ 98+ 99 + 100 
+                         S = 100 + 99 + 98 + 97 + 96 + 95 + 94 + 93 + 92 + 91 + ........+ 3 + 2 + 1     // GAUS'S wrote the number in reverse order
+                         ----------------------------------------------------------------------------
+                         2s = 101 + 101 + 101 + ............. + 101 + 101 + 101 ==> 100 times           //  100 times he added 101
+                                  2s = 101 * 100 = 10100
+                                        S = 101 * 100 / 2
+                                        S = 5050
+            
+            1.4.3 GEMERALISING THIS FOR N NATURAL NUMBERS ? || HOW THE N NATURAL NUMBER FORMULA CAME. 
+                  ANS --> S = 1 + 2 + 3 + ... + (N-2) + (N-1) + N                                       // doing for any number of N
+                          S = N + (N-1) + (N-2) + ... + 3 + 2 + 1
+                          ----------------------------------------
+                          2S = (N+1) + (N+1) + (N+1) + ... + (N+1) + (N+1) + (N+1) ==> N times          // (N - 1) + 2 = (N + 1)  && (N - 2) + 3 = (N + 1)
+                          
+                                2S = (N+1) * N 
+                                S = (N+1) * N / 2
+                                
+````
+        1.5 SUM OF WHOLE NUMBER 
+            ANS --> Number which starts from 0. 
+            1.5.1 FIRST 5 WHOLE NUMBERS ?
+                  ANS --> 0, 1, 2, 3, 4  ==> 0 to (5-1). 
+            1.5.2 FIRST N WHOLE NUMBERS ?
+                  ANS --> 0, 1, 2, 3 , .... , (N-1) 
+                  EG --> Nautral numbers ==> 1, 2, 3, 4, 5... (N-1)       // first 5 natural numbers 
+                  QUES --> WHY (N-1) ?
+                           ANS --> because, we have to included 0 also. so, at left side we have to add 0. & at right side we will go till N-1.
+                  QUES --> CONVERTING FIRST 5 NATURAL NUMBER TO WHOLE NUMBERS ?
+                           ANS --> 0, 1, 2, 3, 4                          // 0 to (N-1) ==> 0 to 5-1 = 4
+                  CONCLUSION --> adding 0 to any number will not change the number.
+                                    0 + "1 + 2 + 3 + ... + (N-1)"  ==> also SUM OF FIRST (N-1) NATURAL NUMBERS. 
+                                    SO --> IN THE SAME FORMULA "RERPLACE N WITH N-1"
+                                    LIKE --> (N-1) * { (N-1) + 1 } / 2 
+                                    THEN --> (N-1) * N / 2
+                  SUMMARY --> This is the ans of SUM OF FIRST N WHOLE NUMBERS ==> (N-1) * N / 2. ==  SUM OF FIRST (N-1) NATURAL NUMBERS.   
+
+````
+        1.6 INTEGER DIVISION
+            EG --> int a = 7
+                   print(a/2), what it will print ?
+                   ANS --> 3, it will not print 3.5
+                   BECAUSE --> 7 is int & when we divide this 7 by int 2, then the resultant will also be int.
+                   
+            FLOOR VALUE --> "IF WE HAVE AN INTEGER & DIVIDE WITH THE INTEGER THEN WE GET THE INTEGER" 
+            MEANS --> "IF THE DATA TYPE IS INTEGER THEN THE RESULTANT WILL ALSO BE INTEGER & IF THE DATA TYPE IS FLOAT THEN THE RESULTANT WILL ALSO BE FLOAT"
+            EG --> 5.0 / 2 ==> 2.5 
+            
+            1.6.1 GIVE A +VE NUMBER N, WE HAVE TO COUNT THE NO. OF TIMES IT IS DIVIDED BY 2 TO REACH 1.
+                  LIKE --> N = 8, 8/2 = 4, 4/2 = 2, 2/2 = 1.
+                           SO --> 8 is divided by 2, 3 times to reach 1.
+                  LIKE --> N = 20, 20/2 = 10, 10/2 = 5, 5/2 = 2, 2/2 = 1.
+                           SO --> 20 is divided by 2, 4 times to reach 1.
+                           
+                  LIKE --> N = 12, 12/2 = 6, 6/2 = 3, 3/2 = 1.
+                           SO --> 12 is divided by 2, 3 times to reach 1.
+                           
+            1.6.2  
+                        
+                        
+                  
+        
+
+````
                                                         
 
 ``````
