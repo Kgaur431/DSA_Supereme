@@ -4,6 +4,7 @@
 ### ***IF WE OBSERVE THINGS, WE CAN DO THINGS***
 
 ### BASICS 
+### FACTOR OF N
     1. WHAT IS A FACTOR OF N?
         ANS --> for any number if we devide with certain number means, if there is no which leaves a remainder 0 with 10 --> is a factor of 10.
         like --> no. is 10 and we devide it with 2 ==> if the result will be integer that means the 2 is an factor of 10. 
@@ -54,12 +55,13 @@
 
                     SO --> if gaurav want to see the output he can't see if his machine taking 317 years to execute the code. so the code for count() function is not useful. 
 
-`````` FASTER THE THINGS,  BETTER THE THINGS. {POWER OF THINKING, FINDING THE PATTERNS} `` ``````     
+## FASTER THE THINGS,  BETTER THE THINGS. {POWER OF THINKING, FINDING THE PATTERNS} `` ``````     
 
         1.2  WHY WE NEED OPTIMISATION ?  
             ANS --> Optimising the code means, ** converting the same piece of code into something which will gives exact same result but faster means, takes LESS NUMBER OF ITERATIONS. **
             MEANS --> reducing the number of iterations. 
 
+### OPTIMISE THINGS
         1.3 HOW TO OPTIMISE THINGS ?
             ANS --> we have to do some observation.
                     we take small input and try to see what is the output. and try to make some small small observations. 
@@ -150,8 +152,8 @@
                            SOME OBSERVATIONS THAT CAN GET YOU TO OPTIMISED SOLUTION.
 
             FINALLY --> 317 years to 10 second.     // extermely optimised code.
-
-````    
+ 
+### SUM OF NATURAL NUMBERS
         1.4 SUM OF NATURAL NUMBERS
             1.4.1 SUM OF NATURAL NUMBERS TILL 10 ?
                   ANS --> 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 = 55
@@ -178,7 +180,7 @@
                                 2S = (N+1) * N 
                                 S = (N+1) * N / 2
                                 
-````
+### SUM OF WHOLE NUMBER                                
         1.5 SUM OF WHOLE NUMBER 
             ANS --> Number which starts from 0. 
             1.5.1 FIRST 5 WHOLE NUMBERS ?
@@ -197,7 +199,7 @@
                                     THEN --> (N-1) * N / 2
                   SUMMARY --> This is the ans of SUM OF FIRST N WHOLE NUMBERS ==> (N-1) * N / 2. ==  SUM OF FIRST (N-1) NATURAL NUMBERS.   
 
-````
+### INTEGER DIVISION
         1.6 INTEGER DIVISION
             EG --> int a = 7
                    print(a/2), what it will print ?
@@ -211,30 +213,181 @@
             1.6.1 GIVE A +VE NUMBER N, WE HAVE TO COUNT THE NO. OF TIMES IT IS DIVIDED BY 2 TO REACH 1.
                   LIKE --> N = 8, 8/2 = 4, 4/2 = 2, 2/2 = 1.
                            SO --> 8 is divided by 2, 3 times to reach 1.
+                           
                   LIKE --> N = 20, 20/2 = 10, 10/2 = 5, 5/2 = 2, 2/2 = 1.
                            SO --> 20 is divided by 2, 4 times to reach 1.
                            
                   LIKE --> N = 12, 12/2 = 6, 6/2 = 3, 3/2 = 1.
                            SO --> 12 is divided by 2, 3 times to reach 1.
                            
-            1.6.2  
-                        
-                        
-                  
-        
+            1.6.2  WHAT IS THE NO. OF STEPS TO FINDING N ? 
+                   QUES --> WHAT'S ALL STEPS SHOULD I FOLLOW TO THINK BETTER 
+                   ANS --> I WILL TRY TO FIND THE ANS FOR EVERY N STARTING FROM 1 TO AS MUCH AS POSSIBLE.
+                   HOW --> TAKE N & TRY TO FIND THE NO. OF STEPS TO REACH 1. 
+                   
+                   LIKE -->     N       #STEPS      EXPLANATION
+                                1         0         if n is already 1 then we no need any steps to reach 1.
+                                2         1         2/2 = 1
+                                3         1         3/2 = 1   
+                                4         2         4/2 = 2, 2/2 = 1
+                                5         2         5/2 = 2, 2/2 = 1
+                                6         2         6/2 = 3, 3/2 = 1
+                                7         2         7/2 = 3, 3/2 = 1     
+                                8         3         8/2 = 4, 4/2 = 2, 2/2 = 1
+                                9         3         9/2 = 4, 4/2 = 2, 2/2 = 1
+                                10        3         10/2 = 5, 5/2 = 2, 2/2 = 1
+                                :         :         :
+                                :         :         :
+                                :         :         :
+                                15        3         15/2 = 7, 7/2 = 3, 3/2 = 1  
+                                16        4         16/2 = 8, 8/2 = 4, 4/2 = 2, 2/2 = 1
+                                17        4         17/2 = 8, 8/2 = 4, 4/2 = 2, 2/2 = 1             
+                                :         :         :
+                                :         :         :
+                                :         :         :
+                   OBSERVATION --> 1. if we observe, we have ANS = 1, WHEN STARTING FROM N = 2 
+                                        1.1 we have ANS = 2, WHEN STARTING FROM N = 4
+                                        1.2 we have ANS = 3, WHEN STARTING FROM N = 8
+                                        1.3 we have ANS = 4, WHEN STARTING FROM N = 16
+                   PATTERN -->  N = 2^k, then STEPS = k
+                                MEANS --> N is the POWER OF 2 
+                                EG --> N = 2,
+                                       N = 4,
+                                       N = 8,
+                                       N = 16,
+                                       THE ANS for that will be k. 
+                                LIKE --> IF N = 1,
+                                WRITTEN AS --> N can be written as 2^k,                 
+                                SO --> 1 = 2^0 ==> No. of STEPS = 0 
 
-````
-                                                        
+                                LIKE --> IF N = 2,
+                                WRITTEN AS --> N can be written as 2^k,
+                                SO --> 2 = 2^1 ==> No. of STEPS = 1             
 
-``````
-                    How many number of zero in 10^9
-                     ANS -->  there are 9 zeros in 10^9
-                     EG  -->  10*10*10*10*10*10*10*10*10 = 10^9 = 1 billion 
+                                LIKE --> IF N = 4, 
+                                WRITTEN AS --> N can be written as 2^k,
+                                SO --> 4 = 2^2 ==> No. of STEPS = 2
+
+                                LIKE --> IF N = 8,
+                                WRITTEN AS --> N can be written as 2^k,
+                                SO --> 8 = 2^3 ==> No. of STEPS = 3
+
+                                LIKE --> IF N = 16,
+                                WRITTEN AS --> N can be written as 2^k, 
+                                SO --> 16 = 2^4 ==> No. of STEPS = 4
+                        
+#### LOGARITHM
+                                NOW --> LOGRITHMIC. 
+                                         QUES --> WHAT IS LOGRITHMIC ?
+                                         ANS --> log base b of x = y,
+                                                        ||
+                                         MEANS --> b^y = x 
+                                                    the log basically asked "HOW MUCH POWER SHOULD WE RAISE THIS b TO SO THAT WE GET x ?" 
+                                                    ANS ==> y power should be raised to b so that we get x.
+                                WRITE --> k = log base 2 of N
+                                MEANS --> 2^k = N so, k can be written as log base 2 of N
+                                EG --> log base 3 of 27 = ?
+                                       MEANS --> 3 REAISE TO THE POWER HOW MUCH, WILL MAKE IT 27 ?
+                                       ANS -->  3^3 = 27, SO --> 3 REAISE TO THE POWER 3 WILL MAKE IT 27.
+                                                          SO --> 3^k = 27, SO --> k = 3
+                        
+                                EG --> log base 2 of 16 = ?
+                                        MEANS --> 2 REAISE TO THE POWER HOW MUCH, WILL MAKE IT 16 ?
+                                        ANS -->  2^4 = 16, SO --> 2 REAISE TO THE POWER 4 WILL MAKE IT 16.
+                                                           SO --> 2^k = 16, SO --> k = 4
+                                EG --> if the num in between 
+                                        2^k <= N < 2^(k+1) 
+                                        THEN --> NO. OF STEPS  = k, ANS ==> K of any value of N. {line 319.}                ** IMP **
+                                        IMP --> log base 2 of 2^k = ?
+                                                MEANS --> 2 REAISE TO THE POWER HOW MUCH, WILL MAKE IT 2^k ?
+                                                ANS -->  2 REAISE TO THE POWER k WILL MAKE IT 2^k.
+                                                                      SO --> log base 2 of 2^k = k 
+                                                EG --> log base 2 of 2^3 = x
+                                                        MEANS --> 2 REAISE TO THE POWER HOW MUCH, WILL MAKE IT 2^3 ?
+                                                                            || 
+                                                        MEANS -->  2^x = 2^3        
+                                                                   SO --> x = 3
+                                                        ANS -->  2 REAISE TO THE POWER 3 WILL MAKE IT 2^3.
+                                                                          SO --> log base 2 of 2^3 = 3
+
+                                        NOW --> TAKE LOG BOTH SIDE
+                                        LOG --> (log base 2 of 2^k = k) <= (log base 2 of N = k) < (log base 2 of 2^(k+1) = k+1)
+                                        MEANS --> k <= log base 2 of N < k+1
+
+                                NO. OF STEPS FOR N --> {log can be a decimal number so we will simply write in integer like ==> floor(log base 2 of N)}
+                                                       EG --> N = 10
+                                                              2^3 <= 10 < 2^4
+                                                              SO --> NO. OF STEPS = 3  
+                                                              BECAUSE --> 3 <= log base 2 of 10 < 4                 // did log both side
+                                                                            ||
+                                                              BECAUSE --> 3 <= {log base 2 of 10} ==> 3.3219 < 4    // we will take integer part of log
+                                
+                                SUMMARY --> log basically means that "HOW MUCH POWER SHOULD WE RAISE OF BASE b SO THAT WE GET X."
+###  SQUARE ROOT
+        1.7 
+            QUES --> GIVEN A PERFECT SQUARE NUMBER, FIND THE SQUARE ROOT OF THAT NUMBER.
+            PERFECT SQUARE --> 
+                                EG --> 10 * 10 = 100
+                                DEFINE --> "ANY INTEGER MULTIPLIED BY ITSELF, IF RESULTS IS AN NUMBER, THEN THAT NUMBER IS CALLED PERFECT SQUARE."
+                                PERFECT SQUARE --> 100. 
+                                LIST OF PERFECT SQUARE --> 100, 49, 36, 25, 16, 9, 4, 1
+                                LIKE --> N = 49
+                                SQUARE ROOT --> 7  ==> 7 * 7 = 49
+                                QUES --> IF FOR ANY PERFECT SQUARE NUMBER N, TO FIND THE SQUARE ROOT OF THAT NUNMBER 
+                                ANS --> 1 <= SQUARE ROOT(N) <= N.       // square root of any perfect square number is always within this range. 
+                                CODE -->    N is an perfect square. N = 9.
+                                        for i --> 1 to N;
+                                            if (i * i == N)
+                                                return i;               // this will return definately that we sure because N is an perfect square.
+
+                                No. OF ITERATION -->  SQUARE ROOT(N) = 3 
+                                CONSTRAINTS --> INPUT will be the perfect square number. otherwise code will throw invalid input. 
+                                                    EG --> N = 25.
+                                                            i --> 1, i * i = 1, 1 != 25, i++ = 2
+                                                            i --> 2, i * i = 4, 4 != 25, i++ = 3   
+                                                            i --> 3, i * i = 9, 9 != 25, i++ = 4
+                                                            i --> 4, i * i = 16, 16 != 25, i++ = 5
+                                                            i --> 5, i * i = 25, 25 == 25, return i = 5
+                                                    
+                                                    EG --> N = 9
+                                                            i --> 1, i * i = 1, 1 != 9, i++ = 2
+                                                            i --> 2, i * i = 4, 4 != 9, i++ = 3   
+                                                            i --> 3, i * i = 9, 9 == 9, return i = 3
+                                CONCLUSION --> "for any N, we definately don't travel till N, we will travel till SQUARE ROOT(N)."
+## **IMPORTANT LEARNING**
+1.    Don't look at the "what is the for loop statement"  
+
+           CONSTRAINTS --> N = PERFECT SQUARE NUMBER
+           CODE --> 
+                    for i --> 1 to N;
+                    if (i * i == N)
+                    return i;
+            Don't DO --> i = 1 & i is <n  then the Time Complexity will be O(N)     --> WRONG 
+            DO --> **WE SHOULD LOOK AT WHAT IS THE BREAKING CONDITON TOO**
+            LIKE -->  we should check the code is actually running N times? 
+            EG --> if N is an perfect square then code will definately run till SQUARE ROOT(N) times. 
+            BUT --> if in question they are not mentioned that N is an perfect square then code wil run N times.
+
+### CONCLUSION
+**FOR ANY LOOPING STATEMENT WE MUST SEE THE BREAKING CONDITION.**
+
+### WHY WE HAVE TO SEE THE CONSTRAINTS ?
+**DUE TO THE CONTRAINTS THE CODE WAS RUNNING SQUARE ROOT(N) TIMES.**
      
 
-``````
+### WHY  WE INTRODUCE PROGRAMMING, SYSTEMS, AND ALGORITHMS
     2. WHY  WE INTRODUCE PROGRAMMING, SYSTEMS, AND ALGORITHMS?
         like --> if we ask that how many factore does this number have? 
                  10384589624 --> we have to check all the numbers from 1 to 10384589624 manually like using pen and paper.
         so --> ** as human we have certain limitation **, for that reason we have to use computer to solve this problem faster. 
+
+# SIGMA RULE's
+1. whatever the mentioned in the question, we have to only answer that. do check **STATEMENT, CONSTRAINTS, INPUT, OUTPUT** very well.  
+2. THE STEPS TO SOLVE ANY PROBLEM 
+    1. **spend some time on your own & try to solve it without taking any help** like 1 hour, 2 hour, 3 hour etc. **fixed ==> 2 to 3 hours**.
+             ~~if after fixed time you are not able to solve it then,~~
+    2.  **watch the hints || watch the video explanation then, spend 1 hour**
+        ~~if you are not able to solve it now then,~~
+    3. check the solution. or ask the solution.
+   
      
