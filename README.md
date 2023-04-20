@@ -187,7 +187,7 @@
                   ANS --> 0, 1, 2, 3, 4  ==> 0 to (5-1). 
             1.5.2 FIRST N WHOLE NUMBERS ?
                   ANS --> 0, 1, 2, 3 , .... , (N-1) 
-                  EG --> Nautral numbers ==> 1, 2, 3, 4, 5... (N-1)       // first 5 natural numbers 
+                  EG --> Nautral numbers ==> 1, 2, 3, 4, 5 
                   QUES --> WHY (N-1) ?
                            ANS --> because, we have to included 0 also. so, at left side we have to add 0. & at right side we will go till N-1.
                   QUES --> CONVERTING FIRST 5 NATURAL NUMBER TO WHOLE NUMBERS ?
