@@ -183,47 +183,201 @@
         {
             s = s + i;
         }  
-        ANS --> (N + 1)/2 iterations. {means, ceil(N/2) iterations. because N+1 is the upper bound of N/2.}--> for explaination only.
+        ANS --> (N + 1)/2 iterations. {means, ceil(N/2) iterations. because N+1/2 is the upper bound of N/2.}--> for explaination only.
                 WE ARE ONLY DOING INTEGER DIVISION.
                   
         EXPLAIN --> i = 1 ==> 3 ==> 5 ==> 7 ....
                         ASSUME --> 
-                                    N = 4, --> so, i = 1 ==> 3 ==> stop.        #iterations = 2. 
-                                    N = 5, --> so, i = 1 ==> 3 ==> 5 ==> stop.  #iterations = 3.
-                                    N = 6, --> so, i = 1 ==> 3 ==> 5 ==> stop.  #iterations = 3.
-                        
-        SO --> "for any given N, we are formed N/2 iterations. "  
-        BECAUSE -->  because of INTEGER DIVISION. 
-                        so, for N = 4, then 4/2 = 2.        #iterations = 2.
-                            for N = 5, then 5/2 = 2.5        #iterations = 3.
-                                why we make 2.5 to 3 ?
-                                because of INTEGER DIVISION.
-                                    N = 5,
-                                        then, (5+1)/2 = 3
-                                    
-                            ceil value --> **WE JUST UPER BOUND TO NEXT INTEGER**          means, 2.5 to 3. forward 
-                            floor value --> is 2. because we decrease the current integer. means 2.5 to 2.  backward
-                            like    6/2 = 3,
-                                    7/2 = 3, 
-                                    8/2 = 4,  
-                                    9/2 = 4   
-                                    ==> Because of Integer Division.
-                            
-        Imp --> "for even number we are not considering 1/2. ==> so, for that N/2 iterations only. 
-                    like even number N = 4, 
-                              then, 4/2 = 2. 
-                                    ||
-                                   (4+1)/2 = 2.5
-                                    the integer division will make 2.5 to 2.
-                    so, both are same. that's why we not consider 1/2.
-                 for odd number we are considering 1/2. ==> so, for that (N+1)/2 iterations. "  
-                    like odd number N = 7,
+                                    N = 2, --> so, i = 1 ==> stop.                              #iterations = 1.
+                                    N = 3, --> so, i = 1 ==> 3 ==> stop.                        #iterations = 2. 
+                                    N = 4, --> so, i = 1 ==> 3 ==> stop.                        #iterations = 2. 
+                                    N = 5, --> so, i = 1 ==> 3 ==> 5 ==> stop.                  #iterations = 3.
+                                    N = 6, --> so, i = 1 ==> 3 ==> 5 ==> stop.                  #iterations = 3.
+                                    N = 7, --> so, i = 1 ==> 3 ==> 5 ==> 7 ==> stop.            #iterations = 4.
+                                    N = 8, --> so, i = 1 ==> 3 ==> 5 ==> 7 ==> stop.            #iterations = 4.
+                                    N = 9, --> so, i = 1 ==> 3 ==> 5 ==> 7 ==> 9 ==> stop.      #iterations = 5.
+                                                                    so on...
+                                                                    
+                                    N               #iterations
+                                    2               1
+                                    3               2
+                                    4               2
+                                    5               3
+                                    6               3
+                                    7               4
+                                    8               4
+                                    9               5
+                        OBSERVE--> 
+                                1. if we carefully observe the above thing then we can see that, 
+                                    for any given N, we are formed N/2 iterations in most cases.
+                                2. in Even Numbers case ==> if N is even then we are formed N/2 iterations.
+                                    LIKE --> N = 2, no. of Iteration ==> 1.         (2/2 = 1)
+                                             N = 4, no. of Iteration ==> 2.         (4/2 = 2)
+                                             N = 6, no. of Iteration ==> 3.         (6/2 = 3) 
+                                             N = 8, no. of Iteration ==> 4.         (8/2 = 4) so on...
                                              
-                                      
+                                3. in Odd Numbers case ==> in Odd Number case we are not forming N/2 iteration. 
+                                    LIKE --> N = 3, no. of Iteration ==> 1          (3/2 = 1.5) only int value because of integer division.
+                                             N = 5, no. of Iteration ==> 2          (5/2 = 2.5) only int value because of integer division.
+                                             N = 7, no. of Iteration ==> 3          (7/2 = 3.5) only int value because of integer division.
+                                             N = 9, no. of Iteration ==> 4          (9/2 = 4.5) only int value because of integer division. so on...
+                                    NOT TRUE -->         it is showing like if N is odd then we are forming N-1/2 iterations.
+                                             
+                                    ACTUALLY --> WE are loosing 1 iteration in odd number case. because we are not taking upper bound value
+                                    SO --> we will do ceil(N/2) iterations. 
+                                          ceil value --> **WE JUST UPER BOUND TO NEXT INTEGER**          means, 2.5 to 3. forward 
+                                          floor value --> is 2. because we decrease the current integer. means 2.5 to 2.  backward
+                                    MEANS --> (N + 1)/2, so we will take upper bound value.  
+                                
+                                4. IF WE TAKE Ceil value for EVEN NUMBERS that will not impact. 
+                                    LIKE --> N = 4, then (N+1)/2 ==> (4+1)/2 ==> 5/2 = 2.5, INTEGER DIVISION OF 2.5 is 2 only. 
+                                             N = 10, then (N+1)/2 ==> (10+1)/2 ==> 11/2 = 5.5, INTEGER DIVISION OF 5.5 is 5 only.
+                                
+                                5. IF WE TAKE Ceil value for ODD NUMBERS that will impact. 
+                                    LIKE --> N = 3, then (N+1)/2 ==> (3+1)/2 ==> 4/2 = 2, INTEGER DIVISION OF 2 is 2 only. 
+                                             N = 9, then (N+1)/2 ==> (9+1)/2 ==> 10/2 = 5, INTEGER DIVISION OF 5 is 5 only. 
+                        CONCLUSION -->
+                                        WE ARE DOING ONLY INTEGER DIVISION. 
+                                        No. of Iteration for all numbers is (N+1)/2.
+                                                       
+  
+  4. int s = 0;
+         for(int i=0; i<=100; i++)
+         {
+             s = s + i + i * i;
+         }
+         return s;
+         
+         ANS --> 101 iterations.
+         EXPLAIN --> there is no impact on the no. of iterations by the value of N. 
+                     because we are executing the loop from 0 to 100. 
+                     so, no. of iterations is constant. 
+         QUES --> HOW TO CALUCLATE THE NO. OF ITERATIONS FOR THE N VALUE.
+         ANS --> FORMULA OF RANGE ==> R-L+1  
+         LIKE --> [L, R]
+                  [0, 100] 
+                    ==> 100 - 0 + 1 ==> 101 iterations.          
+                    
+                                             
+  5. int s = 0;
+        for(int i=1; i*i<=N; i++)
+        {
+            s = s + i;
+        }
+        return s;
+        
+        ANS --> sqrt(N) iterations. 
+        EXPLAIN --> i is going from  1 till the point when i square <= N.
+                    so, it continuous till i square becomes N.
+                    i will increase like 1, 2, 3, 4 so on... till i square <= N.
+        OBSERVE -->
+                    N = 4, i = 1, 2, stop.  #iterations = 2.
+                    N = 5, i = 1, 2, stop.  #iterations = 2.
+                    N = 6, i = 1, 2, stop.  #iterations = 2.
+                    N = 7, i = 1, 2 stop.   #iterations = 2.
+                    N = 8, i = 1, 2 stop.   #iterations = 2.
+                    N = 9, i = 1, 2, 3 stop. #iterations = 3.
+                    N = 10, i = 1, 2, 3 stop. #iterations = 3.
+                    
+                    
+                   N = 16, i = 1, 2, 3, 4 stop. #iterations = 4.
+                   
+                   So, we can see that,
+                     if N is perfect square then we are forming sqrt(N) iterations.
+                        LIKE --> N = 4, i = 1, 2 stop. #iterations = 2.
+                                 N = 9, i = 1, 2, 3 stop. #iterations = 3. 
+                                   
+        NOW --> WE will do SQUARING BOTH SIDE
+                    i square = N
+                    i = sqrt(N)  
+                the range of i 
+                   i ==> [1, sqrt(N)]     
+                   then, sqrt(N) - 1 + 1 ==>
+        
+        CONCLUSION --> sqrt(N) iterations.
+  
+  6. int i = N; // N > 0
+        while(i > 1) 
+            {
+                i = i / 2;
+            }                       
+         
+        ANS --> log
+        OBSERVE --> 
+                    initally ==> i = N.
+                    next step ==> i is becoming N/2.     // Because we are doing i = i/2. 
+                    next step ==> i is becoming N/4.     // Because we are doing i = i/2 * i/2.
+                    next step ==> i is becoming N/8.     // Because we are doing i = i/2 * i/2 * i/2. 
+                    so on... it will continue till it reaches 1.
+                    
+        IMP --> "no.of times N is divided by 2 to reach 1" is what ?
+        ANS -->  log base 2 of N. || log2(N) iterations. 
+        
+        QUES --> WHY WE USE LOG HERE ? || HOW DO WE GET THE IDEA OF USING LOG HERE ?
+        ANS --> BECAUSE, we want to know "no. of times, N is divided by 2 to reach 1".
+                so, we will use log. 
+                like N = 16, then log2(16) ==> 4.
+                means 16 is divided by 2, 4 times to reach 1.
+                                    ||
+                HOW MUCH TIME N IS DIVIDED BY 2 TO REACH 1 ?
+                ANS --> log2(N) times.
+                                    ||
+                log base 2 of ? = N.
+                eg N = 16,
+                        log base 2 of 4 = 16.
+                means how much power should we raised this 2, to get 16.
+        
+        EXAMPLE -->
+                    N = 16, 
+                       then, i = N ==> 16
+                       then, i = i/2 ==> 8
+                       then, i = i/2 ==> 4
+                       then, i = i/2 ==> 2
+                       then, i = i/2 ==> 1
+                                 iterations ==> 4.
+                       
+                       HOW 
+                            N = 16, 
+                                then, N/2 ==> N/4 ==> N/8 ... 1.
+                                like, 16/2 ==> 8/2 ==> 4/2 ==> 2/2 ==> 1.
+                                                ||
+                                      16/2 ==> 16/4 ==> 16/8 ==> 16/16 ==> 1.
+                          
+               
 ```
-            
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+This error means that your local branch is behind the remote branch and you need to integrate the remote changes before pushing again¹. This can happen when someone else has pushed new commits to the same branch as you². You can fix this by fetching and merging the remote changes with your local work using `git fetch` and `git merge` commands, or simply using `git pull` command¹². Alternatively, you can use `git rebase` command to reapply your local commits on top of the remote branch², but be careful as this can rewrite the history and cause conflicts³. You can also use `git push -f` command to force push your local changes and overwrite the remote branch, but this is not recommended as it can potentially lose work or delete other people's contributions⁴⁵.
+
+Source: Conversation with Bing, 25/4/2023
+(1) Dealing with non-fast-forward errors - GitHub Docs. https://docs.github.com/en/get-started/using-git/dealing-with-non-fast-forward-errors.
+(2) Git push rejected "non-fast-forward" - Stack Overflow. https://stackoverflow.com/questions/20467179/git-push-rejected-non-fast-forward.
+(3) Rejected non fast forward-Git push rejected “non-fast-forward”. https://www.janbasktraining.com/community/devops/git-push-rejected-non-fast-forward.
+(4) What does "Git push non-fast-forward updates were rejected" mean?. https://stackoverflow.com/questions/4684352/what-does-git-push-non-fast-forward-updates-were-rejected-mean.
+(5) Common Git Errors, How to Fix, and 5 Ways to Avoid Them. https://komodor.com/learn/git-errors/.
  
     
