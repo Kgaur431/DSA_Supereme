@@ -154,7 +154,8 @@
         ANS --> N iterations.
         EXPLAIN ==> i --> [1, N] ==> N times.
                     MEANS ==> " i loop will go starting from 1 to till N ==> that implies no. of iteration is N. " 
-   
+        TC --> O(N)
+        
    2. void solve(N,M) 
         {
             for(int i = 1; i <= N; i++)                 |
@@ -177,7 +178,11 @@
          EXPLAIN --> " i loop will go starting from 1 to till N ==> that implies no. of iteration is N. " 
                         " i loop will go starting from 1 to till M ==> that implies no. of iteration is M. " 
                         " so, total no. of iteration is N + M. " 
-   
+         TC --> O(N + M) || O(Max(N,M)) ==> means, we are taking the maximum value of N and M. which is have highest value. 
+                                                    that will be the TC. means if we know the which one is bigger and which one is 
+                                                    smaller. then we can write the TC = bigger term. otherwise we have to write the
+                                                    TC in this way. O(N + M).
+            here, there is no relationship between N and M. hence we have to consider both the loops.
    3. int s = 0;
         for(init i = 1; i<= N; i+2)
         {
@@ -239,7 +244,9 @@
                         CONCLUSION -->
                                         WE ARE DOING ONLY INTEGER DIVISION. 
                                         No. of Iteration for all numbers is (N+1)/2.
-                                                       
+        TC --> O(N), because the rate of growth of this function is linear. so, we can say that TC is O(N).
+                     like --> every time i is increasing by 2. so, we can say that the rate of growth of this function is linear.
+                              1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, .... so on.                                              
   
   4. int s = 0;
          for(int i=0; i<=100; i++)
@@ -257,11 +264,14 @@
          LIKE --> [L, R]
                   [0, 100] 
                     ==> 100 - 0 + 1 ==> 101 iterations.          
-                    
+         TC --> O(1) 
+                 this is an constant function because the function is not growing 
+                 like ==> 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, .... till 100.       
+                
                                              
   5. int s = 0;
         for(int i=1; i*i<=N; i++)
-        {
+        { 
             s = s + i;
         }
         return s;
@@ -278,8 +288,8 @@
                     N = 8, i = 1, 2 stop.   #iterations = 2.
                     N = 9, i = 1, 2, 3 stop. #iterations = 3.
                     N = 10, i = 1, 2, 3 stop. #iterations = 3.
-                    
-                    
+                    .
+                    .
                    N = 16, i = 1, 2, 3, 4 stop. #iterations = 4.
                    
                    So, we can see that,
@@ -295,21 +305,36 @@
                    then, sqrt(N) - 1 + 1 ==>
         
         CONCLUSION --> sqrt(N) iterations.
+        TC --> O(sqrt(N))
   
-  6. int i = N; // N > 0
+  6. int s = 0; 
+        for(int i=0; i<N; i=i*2)
+        {
+            s = s + i;
+        }
+        return s;
+        ANS --> infinite loop. 
+        QUES --> WHY ?
+        ANS --> because i is initally 0,
+                then, i is becoming 0*2 ==> 0.
+                then, i is becoming 0*2 ==> 0.
+                then, i is becoming 0*2 ==> 0.
+                so on... it will continue till infinity.
+  
+  7. int i = N; // N > 0
         while(i > 1) 
             {
                 i = i / 2;
             }                       
          
-        ANS --> log
+        ANS --> log base 2 of N iterations. || log2(N) iterations.
         OBSERVE --> 
                     initally ==> i = N.
                     next step ==> i is becoming N/2.     // Because we are doing i = i/2. 
                     next step ==> i is becoming N/4.     // Because we are doing i = i/2 * i/2.
                     next step ==> i is becoming N/8.     // Because we are doing i = i/2 * i/2 * i/2. 
                     so on... it will continue till it reaches 1.
-                    
+
         IMP --> "no.of times N is divided by 2 to reach 1" is what ?
         ANS -->  log base 2 of N. || log2(N) iterations. 
         
@@ -329,6 +354,7 @@
         
         EXAMPLE -->
                     N = 16, 
+                    
                        then, i = N ==> 16
                        then, i = i/2 ==> 8
                        then, i = i/2 ==> 4
@@ -343,41 +369,417 @@
                                                 ||
                                       16/2 ==> 16/4 ==> 16/8 ==> 16/16 ==> 1.
                           
-               
+        NOTE --> we can find the no. of iterations by using GEOMETRIC Progression
+        TC --> O(log2(N)) || O(log(N)) both are same.
+                
+**************Property of Log**************
+                log base b of a = log a / lob b.  // both are same.
+                                                  // base can be anything
+                EXAMPLE ==> log base 4 of 64 = log 64 / log 4. means log 2 of 64 / log 2 of 4.
+                                3  =  6 / 2.        //  4*4*4 = 3 times 4 is 64.
+                                3  =  3.          // so, both are same.
+                             log base 2 of N = log N / log 2. // both are same.
+                             
+                    
+        
+        
+  8. int s = 0;
+       for(int i=1 ; i<N; i=i*2)
+            {
+                s = s + i;
+            }
+        return s;
+        
+       ANS --> log base 2 of N iterations. || log2(N) + 1 iterations.
+       CASE --> 
+                WHEN N is perfecct square.
+                THEN, log2(N) iterations.
+                
+                WHEN N is not perfect square.
+                THEN, log2(N) + 1 iterations.
+                
+                    like ==> N = 5, then log2(5) + 1 ==> 3 iterations.       i = 1, 2, 4, stop.
+                    like ==> N = 8, then log2(8) ==> 3 iterations.           i = 1, 2, 4, stop.
+                    like ==> N = 9, then log2(9) + 1 ==> 4 iterations.       i = 1, 2, 4, 8, stop.
+                    like ==> N = 10, then log2(10) + 1 ==> 4 iterations.     i = 1, 2, 4, 8, stop.
+                    
+       OBSERVE --> i is initally 1.    i*2 ==> i.
+                   then, i is becoming 1*2 ==> 2. & i increment twice of previous value of i.
+                   then, i is becoming 2*2 ==> 4. & i increment twice of previous value of i.
+                   then, i is becoming 4*2 ==> 8. & i increment twice of previous value of i.
+                   so on... it will continue till it reaches N.
+                   
+       IMP --> "no.of times i is multiplied by 2 to reach N" is what ?
+       ANS -->  log base 2 of N. || log2(N) + 1 iterations.
+       
+       QUES --> WHY WE USE LOG HERE ? || HOW DO WE GET THE IDEA OF USING LOG HERE ?
+       ANS --> BECAUSE, we want to know "no. of times, i is multiplied by 2 to reach N".
+               so, we will use log. 
+               like N = 16, then log2(16) ==> 4.
+               means i is multiplied by 2, 4 times to reach 16.
+                                   ||
+               HOW MUCH TIME i IS MULTIPLIED BY 2 TO REACH N ?
+               ANS --> log2(N) + 1 iterations. 
+                                   ||
+               log base 2 of ? = N.
+               eg N = 16,
+                       log base 2 of 4 = 16.
+               means how much power should we raised this 2, to get 16.
+               but we are writing log2(16) = ?
+                means how much power should we raised this 2, to get 16.
+                log2(16) = 4.
+       
+       EXAMPLE --> 
+                    i initially 1,
+                        means, i = 1. 
+                    then we do i = i * 2,
+                        i becomes 2                 2^1
+                    then we do again i = i * 2,
+                        i becomes 4                 2^2
+                    then we do again i = i * 2,
+                        i becomes 8                 2^3
+                        so on... 
+                    it will continue at a point till i becomes 2^k = (when i reaches N) N 
+                        means ==> 
+                                    1. 2^k value is greater than N. then loop will break.
+                    
+                    QUES --> WHY 2^k ?
+                    ANS --> because, we are doing i = i * 2.
+                            every time the power of 2 is increasing 
+                            so we can write it as 2^k.
+                            now we have to find k. to know the no. of iterations.
+                    
+                    QUES --> HOW TO FIND k ?
+                    ANS --> K = log base 2 of N.
+                            means, 2^k = N.
+                            means, how much power should we raised this 2, to get N.
+                            means, log base 2 of N.
+                            means, log2(N).
+                            means, log2(N) iterations. 
+                  
+                    SO --> i will continue from 1 to till 2^k = N || log2(N) iterations.
+                             i --> [1, log2(N)]
+                                    log2(N) iterations.
+       
+       HINT --> this is the reverse of the previous question no. 7.
+                means, in the previous question we are diving N by 2 to reach 1.
+                here, we are multiplying i by 2 to reach N.
+       
+       TC --> O(log2(N)) || O(log(N)) both are same.
+              
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-This error means that your local branch is behind the remote branch and you need to integrate the remote changes before pushing again¹. This can happen when someone else has pushed new commits to the same branch as you². You can fix this by fetching and merging the remote changes with your local work using `git fetch` and `git merge` commands, or simply using `git pull` command¹². Alternatively, you can use `git rebase` command to reapply your local commits on top of the remote branch², but be careful as this can rewrite the history and cause conflicts³. You can also use `git push -f` command to force push your local changes and overwrite the remote branch, but this is not recommended as it can potentially lose work or delete other people's contributions⁴⁵.
-
-Source: Conversation with Bing, 25/4/2023
-(1) Dealing with non-fast-forward errors - GitHub Docs. https://docs.github.com/en/get-started/using-git/dealing-with-non-fast-forward-errors.
-(2) Git push rejected "non-fast-forward" - Stack Overflow. https://stackoverflow.com/questions/20467179/git-push-rejected-non-fast-forward.
-(3) Rejected non fast forward-Git push rejected “non-fast-forward”. https://www.janbasktraining.com/community/devops/git-push-rejected-non-fast-forward.
-(4) What does "Git push non-fast-forward updates were rejected" mean?. https://stackoverflow.com/questions/4684352/what-does-git-push-non-fast-forward-updates-were-rejected-mean.
-(5) Common Git Errors, How to Fix, and 5 Ways to Avoid Them. https://komodor.com/learn/git-errors/.
- 
+    NESTED FOR LOOP
+        QUES --> HOW WE CALCULATE NO. OF ITERATION IN NESTED FOR LOOP ?
+        ANS --> 1. maintain table where write all the variable of nested for loop.
+                    i   j   no. of Iterations
+                    for every i, we have to calculate the range of j & calculate the number of iterations.
+```
+  9. for(int i=1; i<=10; i++) {
+        for(int j=1; j<=N; j++) {
+            System.out.println("Hello");
+        }
+    }
+        TABLE
+            i       j      no. of Iterations
+            1       [1,N]   N
+            2       [1,N]   N
+            3       [1,N]   N
+            4       [1,N]   N
+            .
+            .
+            .
+            10      [1,N]   N
+         ---------------------------------
+           No. of Iterations  = 10 * N   
+        TC --> O(N) because 10*N is a linear function & the rate of growth is linear.
+        
+  
+  10. for(int i=1; i<=N; i++) 
+        {
+            for(int j=1; j<=N; j++) 
+            {
+                System.out.println(i+j);
+            }
+        }
+        TABLE
+            i       j      no. of Iterations
+            1       [1, N]  N
+            2       [1, N]  N
+            3       [1, N]  N
+            4       [1, N]  N
+            .
+            .
+            .
+            N       [1, N]  N
+            ---------------------------------
+            No. of Iterations = N * N 
+        TC --> O(N^2) because N*N is a quadratic function & the rate of growth is quadratic.
+  
+  10. for(int i=0; i<N; i++)
+        {
+            for(int j=0; j<=i; j++)   
+            {
+                System.out.println(i+j);
+            }
+        }
+        
+        TABLE
+            i       j      no. of Iterations    j range (every time)
+            0       [0, 0]      1                   0
+            1       [0, 1]      2                   0, 1
+            2       [0, 2]      3                   0, 1, 2
+            3       [0, 3]      4                   0, 1, 2, 3
+            .
+            .
+            .
+            N-1    [0, N-1]     N                   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, ... N-1 = N 
+            ---------------------------------
+            No. of Iterations = 1 + 2 + 3 + 4 + ... + N  ==> this is the sum of N natural numbers.
+                              = N * (N+1) / 2 
+            TC --> O(N^2) because N*N is a quadratic function & the rate of growth is quadratic.
+  
+    11. for(int i=1; i<=N; i++)
+            {
+                for(int j=1; j<=N; j=j*2)
+                {
+                    System.out.println(i+j);
+                }
+            }
+            
+            TABLE
+                i       j      no. of Iterations    j range (every time)        working
+                1       [1, N]      log2(N)         1, 2, 4, 8, ... N       j is increasing by power of 2 
+                2       [1, N]      log2(N)         1, 2, 4, 8, ... N           so it is log2(N)  
+                3       [1, N]      log2(N)         1, 2, 4, 8, ... N
+                4       [1, N]      log2(N)         1, 2, 4, 8, ... N
+                .
+                .
+                .
+                N       [1, N]      log2(N)         1, 2, 4, 8, ... N
+                ---------------------------------
+                No. of Iterations = N * log2(N)
+                TC --> O(N*log2(N)) because N*log2(N) is a linear function & the rate of growth is linear.
     
+    12. for(int i=1; i<=2^N; i++) 
+            {
+                print(i);
+            }
+        
+        No. of Iterations = 2^N
+        QUES --> HOW TO CALCULATE 2^N ?
+        ANS --> i ==> [1, 2^N]
+        TC --> O(2^N) because 2^N is an exponential function & the rate of growth is exponential.
+    
+    13. for (int i=1; i<=N; i++ ) 
+            {
+                for(int j=1; j<=2^i; j++) 
+                {
+                    System.out.println("Hello");
+                }
+            } 
+            
+            Table 
+                i       j           no. of Iterations       j range (every time)                 working
+                1       [1, 2^1]        2^1 = 2             1, 2                                 2^1
+                2       [1, 2^2]        2^2 = 4             1, 2, 3, 4                           2^2  
+                3       [1, 2^3]        2^3 = 8             1, 2, 3, 4, 5, 6, 7, 8               2^3 
+                4       [1, 2^4]        2^4 = 16            1, 2, 3, 4, 5, 6, 7, 8, ... 16       2^4
+                .
+                .
+                .
+                N       [1, 2^N]        2^N                 1, 2, 3, 4, 5, 6, 7, 8, ... 2^N     2^N  
+                -------------------------------------------
+                                        2^1 + 2^2 + 2^3 + 2^4 + ... + 2^N
+            
+            
+            QUES --> WHAT IS THIS SERIES 2^1 + 2^2 + 2^3 + 2^4 + ... + 2^N ?
+            ANS --> it is an Geometric progression. 
+            
+            QUES --> WHY IT IS GEOMETRIC PROGRESSION ?
+            ANS --> because the common ratio is 2.
+                        2^2        /   2^1     = 2
+                        2^3        /   2^2     = 2
+            
+            QUES --> HOW DO WE FIND THE COMMON RATION IN THE SERIES ?
+            ANS --> second term /   first term 
+                    2^2         /   2^1     = 2
+                    2^3         /   2^2     = 2
+                    2^4         /   2^3     = 2
+                    .
+                    .
+                    .
+                    2^N         /   2^(N-1)     = 2
+                    so, the common ratio is 2. 
+            first term = 2^1 ==> 2
+            common ratio = 2
+            No. of terms  = N           // means, how many times we have to multiply the common ratio to get the last term.
+            Formula :- a * (r^N - 1) / (r - 1)  
+                       2 * (2^N - 1) / (2 - 1)
+                       2 * (2^N - 1)
+            TC --> O(2^N) because 2^N is an exponential function & the rate of growth is exponential.
+             
+    14. for(int i=N; i>0; i=i/2) 
+            {
+                for(int j=1; j<=i; j++) 
+                {
+                    System.out.println("Hello");
+                }
+            }
+    
+            QUES --> HOW I OBSERVE ?
+            ANS --> external loop is decreasing by half every time. 
+                    & internal loop is increasing by 1 every time. 
+                        means no. of iterations = log2(N) * sum of N natural numbers. 
+            SUMMARISE --> i was going in wrong direction.
+            
+            Table 
+                i       j       no. of Iterations       j range (every time)                 working
+                N       [1, N]      N                   1, 2, 3, 4, 5, 6, 7, 8, ... N       N
+                N/2     [1, N/2]    N/2                 1, 2, 3, 4, 5, 6, 7, 8, ... N/2     N/2
+                N/4     [1, N/4]    N/4                 1, 2, 3, 4, 5, 6, 7, 8, ... N/4     N/4
+                N/8     [1, N/8]    N/8                 1, 2, 3, 4, 5, 6, 7, 8, ... N/8     N/8
+                .
+                .
+                .
+                1       [1, 1]      1                   1                                   1
+                -------------------------------------------
+                                    N + N/2 + N/4 + N/8 + ... + 1
+                first term = N
+                common ratio =  1/2
+                                    N/4  / N/2
+                                    N/4 * 2/N
+                                    N will be cancelled out.
+                                    1/2 will be left. so, the common ratio is 1/2.
+                N = No. of terms = log 2(N)           // means, how many times we have to divide the N/2 to till its reaches 1.
+                                why log 2(N) ?
+                                because the base is 2.
+                                because every time we are dividing the N by 2.
+                
+                Formula :- a * (r^N - 1)    / (r - 1)
+                           N * (1 - 1/2^N) / (1 - 1/2)
+                           
+                           Solution 
+                            N * (1 - 1/2^log 2(N)) / (1 - 1/2) 
+                            N/(1/2) * (1 - 1/2^log 2(N))           // in Denominator, 1 - 1/2 = 1/2                      
+                            
+                            Now we solve 2^log 2(N) = ?
+                                log 2(N) = x                      
+                             
+                            Now we solve log 2(N) = x             // means, how much power should we raised this 2 to get N. = N only.
+                            means, 2^x = N
+                                Now, the value of 2^log 2(N) = x
+                                    so, the value of x = N
+                                        then, 2^N.  
+                                                   
+                                    2^log 2(N) = N.  
+                                    
+                                    EXAMPLE FOR BETTER UNDERSTANDING 2^log 2(N) ? 
+                                    2^log 2(8) = ?
+                                        log 2(8) = x 
+                                        log 2(8) = 3
+                                            mean 2^3 = 8    // means how much power should we raised this 2 to get 8. = 3 only. so, 2^3 = 8
+                                                so, log 2(8) = 3
+                                                    2^3 = 8                        
+                                                
+                                                like 2^log 2(8) = 8 
+                            
+                            N/(1/2) * (1 - 1/N)   
+                            2N * (1 - 1/N)        // N/(1/2) = 2N  
+                            2N - (N - 1)/N        // doing LCM of N 
+                            2(N - 1)              // in Denominator, N & in Numerator, N both will be cancelled out.
+                
+                2(N - 1) no. of iterations. 
+                CONCLUSION --> we used log property to solve this question.
+            TC --> O(N) although we have 2 loops but the TC is O(N) 
+                   2(N - 1) ==>  O(N)     
+                                                        
+``` 
+
+``` ## Functions  
+
+    ASSUME --> N = 16 
+                then, 
+                    Log 2(N) = 4            // means, how much power should we raised this 2 to get 16. = 4 only. so, 2^4 = 16
+                    sqrt(N) = 4             // means, square root of 16 is 4.
+                    N * Log 2(N) = 64       // means, 16 * 4 = 64
+                    N^2 = 256               // means, 16 * 16 = 256     N square. 
+                    2^N = 65536
+                    N! = 20922789888000     // means, 16 * 15 * 14 * 13 * 12 * 11 * 10 * 9 * 8 * 7 * 6 * 5 * 4 * 3 * 2 * 1 = 20922789888000
+                                            // it is also product of N natural numbers.
+                    
+                    ** for small value log 2(N) & sqrt(N) will not effect more, if we want to see the diff then check for larger number of N**
+```
+# log 2(N) < sqrt(N) < N < N * log 2(N) < N^2 < 2^N < N!
+
+```
+    Brief Explanation about Big O
+        EXAMPLE --> 
+                    f(N) = 2N^2 + 3N + 10
+                        this is an quadratic function. 
+        QUES --> WHY IT IS QUADRATIC FUNCTION ?
+        ANS --> Because "the rate of growth of this function is N^2"              // because the highest power of N is 2.
+        
+        Big O --> "the rate of growth of function with respect to input"  
+                    here, the input was N.
+                    so, the rate of growth of function is N^2.
+                        hence, it is quadratic function.
+                    
+                    O(N^2)
+        
+        QUES --> WHAT IS THE RATE OF GROWTH OF THIS FUNCTION ?  || which of these two terms which defines the growth rate of this function ? 
+                    f(N) = N^3 + N(log 2(N))
+        ANS --> O(N^3)
+                "THE TERM THAT DEFINES THE RATE OF GROWTH OF THIS FUNCTION IS NOTHING BUT THE BIG O NOTATION OF THIS FUNCTION."  
+                  
+                  f(N) = 2^N +n^3 + n!
+                  O(N!)
+                  
+                  f(N) = 2 N log 2(N) + 3 N + 100
+                  O(N log 2(N)) 
+                  
+                  f(N) = 4 N log 2(N) + 3 N sqrt(N) + 100
+                  O(N sqrt(N))
+                  
+                    f(N)
+                   
+```
+### we are not finding function for any particular value, we care about that: 
+**if we increase the value of N which of the terms grow very fast**
+    means which term will dominate the function. that term will define the rate of growth of this function.
+
+## TIME COMPLEXITY 
+**the growth of no. of iteration with respect to input. **
+## POINTS TO BE REMEMBER
+    1. In Programming, whenever any log is given then we have to consider base 2. if the base is not given. then consider default base 2.
+    2. While calculating the no. of iterations, we have to consider the terminate condition & the increment condition.
+    3. log property is:- x^log x(N) = N
+        3.1 example:-  2^log 2(N) = N
+      #REVISE LOG PROPERTIES. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
