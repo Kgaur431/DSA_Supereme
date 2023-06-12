@@ -281,11 +281,44 @@ Issue 1:-  (Big O is ignores the constant factor, but constant factor does not i
 Big O is correct but not 100% correct. it corrects with rate of growth  
 ```
     Both the issue are not very important. but will use 
+    
+        Issues:- 1. Big O only tell us which algo is better than which algo for larger input data.   
+                 2. If Big O tell us both of the No. of Iteration are growing same rate, 
+                        but it does not mean that "both are equally good, may be there is an constanct factor which tell
+                            us that specific algo is better than other algo." means Big O ignores the constant factor.
 ```
 
+``` 
+Pseudo Code 1 :-  Situation where we can't find the exact no. of iteration.
+
+    Searching for an element in array ?
+           
+                bool search (int arr[], int k)
+                {
+                    for(int i = 0; i < arr.length-1; i++)
+                    { 
+                        if(arr[i] == k)
+                            return true;
+                    }
+                    return false;
+                }
+     point 1. We can't tell exactly how many iteration will be there. becoz its depend on "Where the element is present" 
+               we know the worst case scenario is when element is not present in array || last index of array.  O(N)
+               & best case scenario is when element is present at first index.                                  O(1)
+               
+              What Big O does in this Situation ?
+                it tells " I don't care about the best case, i have to take care of worst case scenario." 
+                    becoz we don't know that every time element will be present at first index. so 
+                    we are taking care of worst case scenario.          
+               
+              TC = O(N) 
+```
 
 ##  Big O
 1. **rate of growth of a function.** 
+
+## Time Complexity
+1. **it is rate of growth of No. of iteration with respect the input size.**
 
 ### Power's of 10
 ```
@@ -301,3 +334,112 @@ Big O is correct but not 100% correct. it corrects with rate of growth
     10^9 = 1000000000   No. of zeros = 9
     10^10 = 10000000000 No. of zeros = 10    
 ```
+
+## Space Complexity
+1. **it is rate of growth of space with respect the input size.**
+2. it is also called as Auxiliary Space, means extra space.
+
+``` 
+    Example :- 
+             int ==> 4 bytes.                            long  ==> 8 bytes 
+        
+     code1:-  int x = 10;        4 bytes 
+             int y = x * x;     4 bytes
+             long z = x + y;    8 bytes
+       
+          Total Memory Require:-  16 bytes to run the above code.
+            16 bytes is constant
+            so for this three line of code we can say the SC = O(1)
+                becoz it will not grow with any input. 
+     
+     code2"- Input ==> N,
+             int x = N;                  4 bytes    
+             int y = x * x;              4 bytes
+             long z = x + y;             8 bytes 
+             int[] A = new int[N];       4 * N bytes      // means, array has N elements & every elements take 4 bytes     
+                 this is int array of size N.  
+                 
+                 
+           Total Memory Require:- 16 + 4N  to run the above code.        
+                SC = O(N) 
+                    its Linear, because "With the Increase in Input size,
+                        Amount of space that will be required for this code will increase"
+                        
+                        
+     code3:- Input ==> N,
+             int x = N;                 4 bytes
+             long y = x * x;            8 bytes
+             
+             long[] A= new long[N];     8 * N bytes
+             int[][] B = new int[N][N]; 4 * N^2 bytes       2D array mean we have N^2 elements & each element take 4 bytes.
+        
+        
+            Total Memory Require:- 12 + 8N + 4N^2 to run the above code.
+                SC = O(N^2) 
+                    its Quadratic.  
+                 
+                 
+```
+
+### Space Complexity never depends upon the Computation, its depends on What Data Type we are using.
+
+``` 
+    Total Space that our function or system takes ?
+        Depends on Three Things.
+             1. Input Space
+             2. Algo Space ( space required in algo )
+             3. Output Space 
+
+        Points:-   any time we do any task, we always know "What is the input & What is the expected o/p"
+        Example:-    lets assume 10 people working on same task, for all 10 people input & o/p space is same.  
+                       so compare algo for all 10 people. we consider the space required in their algo. mean algo Space.
+                            so we can ignore the input & o/p space.
+```
+## Space Complexity is the extra space apart from input & output space
+
+```  
+       Example Code:-
+                  int maxArray(int A[]) {
+                        int N = A.length;
+                        int result = A[0];
+                        for(int i = 1; i < N; i++) {
+                            if(A[i] > result)
+                                result = A[i];
+                        }
+                        return result;
+                  }
+                  
+                    in the above code the input space (int arr[]) is important for the system.
+                          but while writing code we not consider it. becoz no matter how we write the code. that input space will be there. 
+                  
+          Input Space:-  N      // becoz the size of int array is 4 * N bytes. 
+                                    this memory always be fixed, no matter how we write the code.   
+                   now we are calculating the space complexity for this algo.
+                        like How much is the space complexity of our algo.   
+                            its O(1)        its does not depends on input size
+                            
+                            means we are just using some int variable to get the ans || store the ans.
+          Space Complexity:- O(1) 
+                                  
+                   myth:- In for loop, are we actually creating this int i, N times ?
+                            No, we actually use just one var or one memory location of 4 bytes. 
+                                we just change his value.
+          
+          Output Space:-  1      // becoz we are returning one int value.   
+                                    means no matter who write the code, just the person will require 4 bytes of memory as o/p/.
+                                            like var is int. 
+           
+           This int array memory we can ignore it. like whatever the input is. & what is o/p space. becoz its fixed.
+              we compare the algo based on extra space its takes.                          
+```
+### Summary of Space Complexity
+1. if we are simply int var or long ... variables, its an constant space. becoz its define memory like 4 bytes or 8 bytes.
+2. if the memory is with respect to input size. like array of size N, then array require 4 * N bytes. & its grow 
+     linearly with the input size. so its O(N).
+3. if we using 2D array, then SC = O(N^2), it will grow quardatic with the input size.
+4. so SC is rate of growth of space with respect to input size.
+5. total space require by our algo or system is depends on three things.
+    1. Input Space & Output Space are fixed.
+    2. Algo Space   that we are consider it.
+6. Algo Space means the extra space that we are taking. 
+7.  **we compare the algo based on extra space its takes**
