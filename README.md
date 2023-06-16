@@ -432,6 +432,112 @@ Pseudo Code 1 :-  Situation where we can't find the exact no. of iteration.
            This int array memory we can ignore it. like whatever the input is. & what is o/p space. becoz its fixed.
               we compare the algo based on extra space its takes.                          
 ```
+### Time Limited Exceed
+``` 
+    it means time taken  by our code to run is more then what it is more then expected.
+      Example:-
+            Kartik gives a contest where the Time limit is 1 Hour & there is 2 Question
+                now, what are the steps to solve the Question
+                    - make the observations || looked at some example & got the ideas
+                    - based on the idea he simply code it.
+                    - submit the code.
+                        Question --> Idea --> Code --> Submit.
+                        
+                        suppose he received an error called TLE.
+                            then he realise that our idea || algo is not such good. although its give correct ans
+                                he go back to idea & cheack weather its good or not. & try to optimise the code based on idea.
+                        
+                now, Kartik have some super power to "Know about TLE, Without writing code"
+                    when we write code in online platform then the code run on platform servers. becoz everyone can consider equally
+                            if all have differents machines.  
+                    he will do some assumptions 
+                        Code --> run on platform serve --> Processing Speed (majority of online platform) = 1GHz
+                                
+                           Processing Speed = 1GHz, means 1GHz = 10^9
+                                that means the "Machine can execute 10^9 instructions per second"
+                           instruction means very small/minor task of code.
+                                like a = 2;     #no. of Instruction is 1.
+                                     d = b + c; # no. of Instruction is 2. firs is adding & second is assigning the result.
+                                     print(a)   #no. of Instruction is 1.
+                                     
+                        If Kartik know the TC of his code like = O(input size || no. of iterations)
+                            means assume kartik writing as single for loop then he knows the no. of iterations.
+                                so we can say he has basic idea like how many for loop he will write, how many fun call he will do.... etc.              
+                
+                Conclusion till now, 
+                        TC :- it is No. of Iteration
+                        Processing Speed :- is no. of Instruction.
+                
+                Making Assumption that will be true in majority case not in all cases.  
+                    "that No. of Instruction in one iteration --> is betweeen 10 to 100. "
+                        means let say, if we are looking for single for loop, how many things || instructions we are 
+                              performing in one iteration of an for loop. 
+                          usually the no. of instruction per iteration is 10 to 100, like if we wrote complex code. then 
+                                    it can be 100 or it can go more than 100.  
+                    
+                    Analysis based on the above:- 
+                        in the online platfrom the expected time limit is given for the code.
+                            #default value is 1 Sec, for C++ users. "depending on Programming lang, Time limit is different"
+                        
+                        assume we are coding in C++ , & if our code is taking more than 1 second. ==> TLE Error.
+                            // our code has to execute all the test cases in 1 sec. 
+                        
+                        if the code is expected in 1 sec. then we can say
+                      #assumption ==> no. of instruction in 1 iteration ==> 10 to 100 
+                        given Time limit = 1sec, Processing speed = 1GHz, so we can perfom 10^9 instruction
+                            
+                          let see how many iteration can we do in 1 sec?
+                             if no. of instruction in 1 iteration is 10.
+                                then how many no. of iteration to complete 10^9 instruction
+                                
+                                            ||
+                             
+                                 for performing 10^9 instruction what is the no of iteration = ?
+                                - 10^8 (becoz in 1 iteration, we perform 10 instruction)
+                                        like 10^8 * 10.
+                                  
+                             
+                             if no. of instruction in 1 iteration is 100.
+                                then how many no. of iteration to complete 10^9 instruction is 10^7 
+                                        like 10^7 * 100. 
+                                                             
+                         so we can NO. Of iteration varies from 10^7 to 10^8 in one second.
+                         
+                        how will this above line will tell us that we will get TLE ?
+                            We need more data to know this.
+                            we have an idea of TC of my code is O(N^2), (we don't know the exact no. of iteration)
+                                but how will I know weathere this is the expected TC or weather it will give TC?
+                                
+                            Using Constraints.
+                                like  1<=N<=10^5 
+                                            this mean larger input size that we are going to receive is 10^5.
+                                            if our code is working for larger input size then we can say that it will work for small input
+                                                it will not through TLE for small input size
+                                                
+                                so if  no of iteration of input size 10^5 
+                                    & TC is O(N^2) then 10^5 * 10^5 = 10^10 
+                                    so it will through TLE. Becoz no. of iteration should in bw 10^7 to 10^8 in one second
+                                
+                                like  1<=N<=10^3 
+                                so if  no of iteration of input size 10^3
+                                    & TC is O(N^2) then 10^3 * 10^3 = 10^6
+                                    so it will not through TLE. Becoz no. of iteration is in bw 10^7 to 10^8 in one second 
+                                
+                                like  1<=N<=10^4
+                                so if  no of iteration of input size 10^3
+                                    & TC is O(N^2) then 10^4 * 10^4 = 10^8
+                                    so it may not or may through TLE. 
+                                        then who will descide it will work or not ?
+                                            "no. of instruction in 1 iteration will descide"
+                                                like in 1 for loop, if we perform very less instruction then it will work
+                                                    or vice versa.
+                                                    so it depends on how much task we are doing in one iteration.
+                                                    
+                                              
+                                  
+```
+
+    
 ### Summary of Space Complexity
 1. if we are simply int var or long ... variables, its an constant space. becoz its define memory like 4 bytes or 8 bytes.
 2. if the memory is with respect to input size. like array of size N, then array require 4 * N bytes. & its grow 
@@ -443,3 +549,4 @@ Pseudo Code 1 :-  Situation where we can't find the exact no. of iteration.
     2. Algo Space   that we are consider it.
 6. Algo Space means the extra space that we are taking. 
 7.  **we compare the algo based on extra space its takes**
+8. complexity of string in java is not defined like int, float. it is depends on length of string becoz its array of character
