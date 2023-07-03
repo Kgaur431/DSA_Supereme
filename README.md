@@ -309,7 +309,7 @@ conditions:-
    A= [-1  4  7  6  -2  7  8  10]
 index=  0  1  2  3   4  5  6  7
 
-   A= [10  8  7  -2  6  7  4  -1]
+   A= [10  8  7  -2  6  7  4  -1] 
    
       Observation:- 
             1. we have to swap the elements. first with last, second with second last & so on.
@@ -325,6 +325,118 @@ index=  0  1  2  3   4  5  6  7
                            
                           (A[3],A[4]) this is the last index where we swqp the elements.
                               so, we if we do like this " keep on increasing the index of i & keep on decreasing the index of j. 
-                                 & if we do again sqqaklllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll tgeb 
-                                 
+                                 what will happen?
+                                    if we again swap (A[3],A[4]), (A[2],A[5]) ... so on then we will get the original array.
+                                    therefore we have to swap the elements till i < j.
                            we have to swap the elements till i < j.
+               
+               Code:-
+                     void reverse(int A[])
+                        {
+                           int i = 0;
+                           int j = A.length-1;
+                           while (i < j)
+                              {
+                                 int temp = A[i];
+                                 A[i] = A[j];
+                                 A[j] = temp;
+                                 i++;
+                                 j--;
+                              }
+                        }
+                        
+                     TC = O(N)
+                     SC = O (1)
+                                 return type will be void becoz we are modifying the input array. so from where the fun called there only we can check whether the array is reversed or not.
+```
+### **Arrays are always pass by reference**
+``` 
+   pass by value:- 
+             passing the int or char ... is pass by value. means we are creating a new copy of the value which is passed to the fun.   
+               so if we modify the new copy of the value then it will not be modified in the main.
+   pass by reference:-
+              for array like data structure the same array is passed to the fun. 
+                so if we modify the array in the fun then it will be modified in the main also.
+```
+
+#### Problem 2:- Given an integer array of size N & an integer K. rotate the array from last to first (forward) by K times. in SC = O(1). (means modify the input array)
+```
+    A= [-1  4  7  6  -2  7  8  10]
+index=   0  1  2  3   4  5  6  7
+
+   k      A= [-1  4  7  6  -2  7  8  10]
+   1 -->     [10 -1  4  7   6 -2  7   8]
+   2 -->     [ 8 10 -1  4   7  6 -2   7]
+   3 -->     [ 7  8 10 -1   4  7  6  -2]
+   
+   
+            
+      Observations:- 
+            1. take small input array & rotate it by 1,2,3 times. 
+                  like:- 
+                     K=0   A= [-1  4  7  6]
+                       1      [ 6 -1  4  7]
+                       2      [ 7  6 -1  4]
+                       3      [ 4  7  6 -1]
+                       4      [-1  4  7  6]  // after 4 times it will be same as original array. 
+                       
+                                                           
+                       
+                   whatever the value of k is. like 5 ,6 ... the ans will be in the range of 0 to 3.   
+                        means, k=5 that is equal to k=1. 
+                              k=6 that is equal to k=2, k=10 that is equal to k=2.
+                              k=7 that is equal to k=3. 
+                              k=8 that is equal to k=0.
+                              ...
+                              
+       observation 1:-    
+                     if(k >= N) 
+                        k = k % N;        ***************
+                     if(k < N) 
+                           not required. becoz k will be in the range of 0 to 3.         
+                       
+                        Example:-
+                             A[10] --> A0  A1  A2  A3  A4  A5  A6  A7  A8  A9
+                             
+                               k=4 --> A6  A7  A8  A9  A0  A1  A2  A3  A4  A5     
+                                    think like:- 
+                                          "whatever the last  elements that will come first & whatever the first  elements that will come last."
+                                            today, we read about reverse the array that will help us to solve this problem.
+                                                   we read about swapping the element but here we want to move multiple elements from last to first or first to last.
+                                                      swap just 2 elements. so its not helpfull.
+                                                      
+                                             suppose we don't know how to solve this question but 
+                                              based on this observation we can say that "reverse will help us" 
+                                                may be reverse will not work, we don't know 
+                                                   "reverse means move the first elements to last & last elements to the first,
+                                                    rotate array also move the first elements to last & last elements to the first. 
+                                                      but the order is diff in both the cases. 
+                                                      the ans is not going to be same as reverse the array.
+                                                      
+                                                      BUT THE IDEA CAN BE SIMILAR" 
+                                                      
+                               index   --> 0   1   2   3   4   5   6   7   8   9
+                               Reverse --> A9  A8  A7  A6  A5  A4  A3  A2  A1  A0
+                               
+                               k=4     --> A6  A7  A8  A9  A0  A1  A2  A3  A4  A5
+                                       now, by looking K=4 & reverse the array
+                                       
+                               carefully observed:-
+                                             - we got to know after reversing 
+                                             - In the elements of k=4
+                                                the first four elemets are the reverse of the first four elements of the reverse array.
+                                                the remaining elements are the reverse of the remaining elements of the reverse array.
+                                             
+                                                - so, we can say that "reverse the array & then reverse the first k elements & then reverse the remaining elements." *************************s
+                               
+                                 Psudo code:-
+                                          reverse(A, 0, N-1)
+                                          reverse(A, 0, K-1)
+                                          reverse(A, k, N-1)     
+                                 
+                                 TC = O(N)
+                                 SC = O(1)
+                                           // we can have multiple approach to solve this problem. but we can't reduce the TC from N to any. 
+                                                becoz we are modifing each & every index of the array.                
+                       
+```   
