@@ -1,6 +1,6 @@
 # DSA_Supereme
 #ASLI CODING 
-## Array
+## Array Module:- 1
 1. it referred to as a collection of elements.
 2. Most of the Data Structures (e.g.Stack and Queue) were derived using the Array structure.
 3. The purpose of an Array is to group similar kinds of data for fast access.
@@ -439,4 +439,133 @@ index=   0  1  2  3   4  5  6  7
                                            // we can have multiple approach to solve this problem. but we can't reduce the TC from N to any. 
                                                 becoz we are modifing each & every index of the array.                
                        
-```   
+```  
+********************************************************************************************************************************************************************************************************************************
+
+## Array Module:- 2
+# Prefix Sum
+
+#### Problem 1:- Given an array of size N. find the sum of elements from index L to R.
+``` 
+     A=[-6  3  2  4  5  -2  1  9]            L=1, R=4
+  index  0  1  2  3  4  5  6  7
+
+        sum = 3 + 2 + 4 + 5 = 14
+        
+        Code:- 
+                int sum = 0;
+                for(int i = L; i <= R; i++)
+                     sum += A[i];
+                     
+                TC = O(N)
+                SC = O(1)
+```  
+### Queries:-
+``` 
+   Ques:- What is the term mean queries ?
+   Ans:- Queries means "same set of task done multiple times".
+   Like:-   
+          means for the same input array, if we ask you to calculate the sum of elements from index L to R for different different L & R. 
+ ```  
+
+##### Problem 2:- Find sum of elements from index L to R for multiple queries.
+```
+     A=[-6  3  2  4  5  -2  1  9]            L= [1 3  0]       Total queries is Q.
+  index  0  1  2  3  4  5  6  7              R= [4 6  5]
+  
+   for Q=1, L=1, R=4                      for Q=2, L=3, R=6                   for Q=3, L=0, R=5
+        sum = 3 + 2 + 4 + 5 = 14                sum = 4 + 5 + (-2) + 1 = 8          sum = -6 + 3 + 2 + 4 + 5 + (-2) = 6
+        
+    - for every query we will traverse the array & get the sum.
+         Bruteforce Approach:- 
+                          TC = O(N * Q) // means, we have Q no. of queries & for every query we are traversing linear time.
+                          SC = O(1)
+       - Statement:- 
+                if we are doing a task once then its ok to do it in linear time. (line 459)
+                   but if we are doing the same task multiple times then there has to be way to do it in better way. logically.
+                   
+           -Real Life Scanerio:-
+                        = suppose, we are going office from our home daily by walk & it takes 1 hour to reach office.
+                           but we don't want to walk for 1 hour & go office then we will definately find the alterante way to reach office.
+                           like:- we will take a bike or car or bus or train. (means we pay certain cost but it will reduce the time)
+                           if we go office from our home, once. then its ok to go by walk.    
+           - so there should be a way to optimise the things. what is that way ?
+                  for that we discuss another case study.
+                        = Case Study:- 
+                                 In Cricket, every over we can score some runs. 
+                                    team :- Kartik
+                                    over:- 10
+                                                initially score is 0 & scoreboard is keep on updating after every over. 
+                                    Over  :-    1   2  3  4  5  6  7  8  9  10
+                                  Scoreboard:-0 16 22 30 45 51 70 75 90 104 120   
+                                  
+                                          Runs 51 means, run after 5th over is completed. 
+                                          Runs 75 means, run after 7th over is completed. || total run after 7th over is completed.
+                                          
+                                          = Ques1:- what is the socre of 10th over alone ?            |
+                                            Ans:-   score after 9th over complete= 104                |
+                                                    score after 10th over complete= 120               |
+                                                    score of 10th over alone = 120 - 104 = 16         |
+                                                                                                      |
+                                          = Ques2:- what is the score of Last 6 over ?                |
+                                            Ans:-   last 6 over means, 5th over to 10th over.         |
+                                                    score before 5th over = 45                        |
+                                                    score after 10th over complete= 120             TC = O(1) per query.               
+                                                    score of last 6 over = 120 - 45 = 75              |
+                                                                                                      |
+                                          = Ques3:- what is the score from 4th to 7th over ?          |
+                                            Ans:-   score before 4th over = 30                        |    
+                                                    score after 7th over complete= 75                 |
+                                                    score of 4th to 7th over = 75 - 30 = 45           |
+                                                                                                      
+                                                   - we are doing the same task like above 
+                                                         TC = O(1) per query. becoz just subtracting the two values.
+           :- what is the diff bw this input & above input is not allowing us to do in constant time.
+                  in the above input we are giving each & every element seprately.
+                  but in the below input  we are giving cumulative input.
+                        cumulative input :-
+                                        we are giving the input in such a way that we can calculate the sum of any range in constant time.
+                                        ********what is the way to give input in such a way ?
+                                                      - we will give the input in such a way that each element is the sum of all the elements before it.********
+                                                -
+                                            like:-  0 16 22 30 45 51 70 75 90 104 120
+                                                      runs = 30 
+                                                        means, the score 30 does not imply that the run scored in the 3rd over.
+                                                        it implies that the run scored till 3rd over. (from starting till 3rd over) 
+      
+                                                    "Scoreboard[i] is runs scored from first to i th over."
+                                                       socreboar[i] means, scoreboard till i over. & total score from starting till i th over.
+                        
+                        In this array we try to do the same. 
+                             A=[-6  3  2  4  5  -2  1  9]            
+                          index  0  1  2  3  4  5  6  7    
+                           
+                          we have to create an array which stores the sum of all the elements from the first to i th index. like below    
+                             Prefix Sum:-                                                                                     *********************************************                         
+                                       "prefix means from start till any index in the middle"
+                              prefixSum= [            ]
+                               means P[i] = sum of elements from 0 to i th index.
+                                            how we can calculate ?
+                                               like:- 
+                                                   - if there is only 1 element in the array 
+                                                         P[0] = A[0] is -6. means from start till that element will be that element only.
+                                                   - if there are 2 elements in the array
+                                                         P[1] = A[0] + A[1] = -6 + 3 = -3. means from start till that element will be sum of both the elements. 
+                                                      ... so on 
+                                                   
+                                            actual:-
+                                                 find P[i] & we already idea about P[i-1]          // P[i] means prefix sum of i th index.
+                                                   means if we know the sum of elements from 0 to till any index i.
+                                                  
+                                                  Example:- find P[i], index i = 1; 
+                                                            index i-1 = 0; means we already know the sum of elements till 0th index.  
+                                                            so, P[i] = P[i-1] + A[i] = -6 + 3 = -3. 
+                                                            
+                                                            find P[i], index i = 4;    assume P[3] is x. 
+                                                            so, P[i] = P[i-1] + A[i] = x + A[i] = x + 5. 
+                                            Formula:- 
+                                                      P[i] = P[i-1] + A[i] 
+                                                      
+                                                      A=[-6  3  2  4  5  -2  1  9]
+                                                      P=[-6 -3 -1  3  8   6  7 16]  // this is score board for the above array A. 
+```                                                            
