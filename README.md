@@ -563,9 +563,70 @@ index=   0  1  2  3   4  5  6  7
                                                             
                                                             find P[i], index i = 4;    assume P[3] is x. 
                                                             so, P[i] = P[i-1] + A[i] = x + A[i] = x + 5. 
-                                            Formula:- 
-                                                      P[i] = P[i-1] + A[i] 
-                                                      
-                                                      A=[-6  3  2  4  5  -2  1  9]
-                                                      P=[-6 -3 -1  3  8   6  7 16]  // this is score board for the above array A. 
+                                            Formula:-  to find prefix sum
+                                                      P[i] = P[i-1] + A[i]                                                                              
 ```                                                            
+``` 
+               We are try to implement the cricet scoreboard concept in the code. to reduce the TC. 
+                      A=[-6  3  2  4  5  -2  1  9]                                                    L= [1 3  0] 
+                      P=[-6 -3 -1  3  8   6  7 16]  // this is score board for the above array A.     R= [4 6  5]
+                                                   // means P[i] = sum of elements from 0 to i th index.
+                        Q1= [1 4]  //  we are finding the sum till the 4th index. & before 1st index.
+                                         assume, run scored from first to 4th over means run scored after 4th over - run scored before 1st over. (we are subtracting becoz till 4th index we have the sum of all the elements before 4th index)
+                                            means, P[4] - P[1-1] = 8 - (-6) = 14.
+                        Q2= [3 6]  ==> P[6] - P[3-1] = 7 - (-1) = 8.
+                      
+                           suppose, by given prefix sum if i have to find the 7 element (means what is the last element of array A given the prefix sum)
+                                       like what was the score of 10th over.
+                                    means, A[i] = P[i] - P[i-1] = 16 - 7 = 9.
+                        Q3= [0 5] ==> P[5] = 8. 
+                                             we don't have to subtract anything becoz we want from starting to 5th index. 
+        TC = O(1) per query.
+                        scanerio:- we are going to office initially it took 1 hour but by taking new bike the time reduced but we paid some cost to buy a bike.
+                                       here, the cost is Prefix Sum(calculating prefix sum take some time & space).
+                                       so, 
+                                          TC = O(N) to calculate the prefix sum.
+                                          SC = O(N) to store the prefix sum.
+        Code:- to find Prefix Sum.
+                  P[0] = A[0];            // line 551
+                  for (int i = 1; i < n-1; i++) {
+                      P[i] = P[i-1] + A[i];
+                  }
+                        TC = O(N) 
+                        SC = O(N) // becoz we are creating P array to store the prefix sum. that is size of N. & Prefix Sum is neither part of input nor output.
+                                          this space has taken by the algorithm to do the task. so, it is part of the algorithm.
+        Code:- for every query.  || finding the sum of any range from L to R.  
+               for i = 0 to q-1;
+                  l = L[i];                              // L[i] to R[i] means this is one query. so we have to find the sum from L[i] to R[i].        
+                  r = R[i];                             
+                  if (l == 0) {                          // if l is 0 means we have to find the sum from starting to r th index.  liek Q3.
+                      ans = P[r];                        // P[r] is the sum of elements from starting to r th index. 
+                  } else {
+                      ans = P[r] - P[l-1];               // P[r] is the sum of elements from starting to r th index. 
+                  }                                      // P[l-1] becoz we have to find the sum from l-1 th index to r th index.  
+                  
+                     TC = O(1) per query. || TC = O(Q) for all the queries. every query takes constant time.
+                        SC = O(1) // becoz we are not creating any new array to store the sum. we are just creating a variable to store the sum.
+                                  
+          Total:- 
+                TC = O(N) + O(Q) = O(N+Q) 
+                SC = O(N) + O(1) = O(N)                                 
+                                          
+           Approach:-
+                  Bruteforce                                         Prefix Sum
+                  TC = O(N*Q)                                         TC = O(N+Q)
+                  SC = O(1)                                           SC = O(N)                               
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+
+```
+### **whatever fun we write the Higher Order term will dominate so whichever is bigger N or Q will dominate so, either we have to write max(N,Q) or (N+Q).**
