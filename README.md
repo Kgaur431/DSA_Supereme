@@ -537,13 +537,14 @@ index=   0  1  2  3   4  5  6  7
                                                        socreboar[i] means, scoreboard till i over. & total score from starting till i th over.
                         
                         In this array we try to do the same. 
+                               L                        R
                              A=[-6  3  2  4  5  -2  1  9]            
                           index  0  1  2  3  4  5  6  7    
                            
                           we have to create an array which stores the sum of all the elements from the first to i th index. like below    
-                             Prefix Sum:-                                                                                     *********************************************                         
+                             Prefix Sum:-   -->                                                                                   *********************************************                         
                                        "prefix means from start till any index in the middle"
-                              prefixSum= [            ]
+                              prefixSum= [-6            ]
                                means P[i] = sum of elements from 0 to i th index.
                                             how we can calculate ?
                                                like:- 
@@ -616,17 +617,46 @@ index=   0  1  2  3   4  5  6  7
                   Bruteforce                                         Prefix Sum
                   TC = O(N*Q)                                         TC = O(N+Q)
                   SC = O(1)                                           SC = O(N)                               
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-                                          
-
 ```
 ### **whatever fun we write the Higher Order term will dominate so whichever is bigger N or Q will dominate so, either we have to write max(N,Q) or (N+Q).**
+``` 
+   Reducing the SC of Prefix Sum.
+            Case Study:- 
+                  we are going office daily & it took 1 hour to reach office. so we purchased bike but we have to pay some cost to buy a bike.
+                       now we don't want to pay any cost to buy a bike or by public transport. so, we have to find some other way to reach office.
+                        "we will move our house near to office." means we are moving the starting point.
+                  we are modifing the input array A. || making array A directly to Prefix Sum P. || instead of creating new array we are make array A as Prefix Sum array P.`
+                     so if we modify the array A then it will take some cost (not talk about TC & SC). WE ARE LOSSING THE ORIGINAL ARRAY A.  
+                           sometimes input is not important for us but sometimes we can't modify the given input so  "depending on the problem it will mentioned that we can modify the input or not."********* Modify the input is an Situational dependant. ********************************
+                           like if someone live in Pg who can shif to near office but someone who live in own house can't shift to near office.
+            How do we Modify the input array ?
+                    A=[-6  3  2  4  5  -2  1  9]  // original array A.
+                          modify the array A like:-
+                                                 A[i] = SUM OF ELEMENTS FROM START TILL i th INDEX. 
+                                                   A[0] = -6; //it will be same.
+                           Formula:-               A[i] = A[i-1] + A[i];             to update input array.
+                                    A= [-6 -3 -1  3  8   6  7 16]  
+                           Code:- 
+                                 for (int i = 1; i < n-1; i++)       // this will convert the array A like prefix sum array P.
+                                 {
+                                     A[i] = A[i-1] + A[i];
+                                 }                  
+                                     TC = O(N)
+                                     SC = O(1)
+   
+   All Approaches:-
+            Bruteforce                                         Prefix Sum                       Modify Input
+               TC = O(N*Q)       --->                              TC = O(N+Q)     --->               TC = O(N+Q)
+               SC = O(1)         --->                              SC = O(N)       --->               SC = O(1)         
+```
+### **Prefix Sum means Left to Right. & Suffix Sum means Right to Left** 
+``` 
+        L                        R
+      A=[-6  3  2  4  5  -2  1  9]
+index=    0  1  2  3  4   5  6  7      <---
+Suffix= [                       9]  // SUFFIX SUM ARRAY.
+         S[i] = SUM OF ELEMENTS FROM i th INDEX TILL END.
+                  Last index will be same.
+                     Suffix= [16 22 19  17 13 8 10 9]  // SUFFIX SUM ARRAY.
+                        S[i] = S[i+1] + A[i];   
+```
