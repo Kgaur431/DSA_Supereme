@@ -442,7 +442,7 @@ index=   0  1  2  3   4  5  6  7
 ```  
 ********************************************************************************************************************************************************************************************************************************
 
-## Array Module:- 2
+## Array Module:- 2  (Range Sum)
 # Prefix Sum
 
 #### Problem 1:- Given an array of size N. find the sum of elements from index L to R.
@@ -817,11 +817,88 @@ index=    0  1  2  3  4   5  6
                                              where prefix sum till index k (P[k]) is same as suffix sum till index k (P[N-1] - P[k-1])"     
                                           means in any ques if we are using prefix sum & suffix sum both then we don't have to create both 
                                              just create prefix sum array & we can calculate the suffix sum by using the formula P[N-1] - P[k-1].           ***********************************
-           
-         
-         
-         
-         
-         
-         
+                 
+```
+``` 
+      There are multiple queries & each query have these three things.
+         1. L  ==> Starting index.
+         2. R  ==> Ending index.
+         3. Type  
+                Two types of Queries.
+                  Type 1:- Sum of even Index elements from L to R.
+                  Type 2:- Sum of odd Index elements from L to R. 
+            
+```
+#### Problem 2:- Given an integer array of size N, find sum of elements for queries ?
+``` 
+        There are multiple queries & each query have these three things.
+  Index= 0   1  2   3  4  5  6
+      A=[8  -3  5  -7  1  4  2]                              Q1  Q2  Q3  Q4
+                                                   Type  -->[1   2    2   1] 
+                                                   Left  -->[1   2    4   3]
+                                                   Right -->[4   6    5   3]
+      Explain:-
+            Q1:- sum of elements from index 1 to 4. & we will take even index elements only. 
+                   index=  1  2  3  4
+                elements= -3  5 -7  1
+                     ans=  5 + 1 = 6
+            Q2:- sum of elements from index 2 to 6. & we will take odd index elements only. 
+                   index=  2  3  4  5  6
+                elements=  5 -7  1  4  2
+                     ans=  -7 + 4 = -3     
+            Q3:- sum of elements from index 4 to 5. & we will take odd index elements only.
+                  index=  4  5
+               elements=  1  4
+                    ans=   4  
+            Q4:- sum of elements from index 3 to 3. & we will take even index elements only.
+                  index=  3
+               elements= -7
+                    ans=  0      // if we don't have EVEM index elements then ans is 0.
+      
+       This ques is look like RANGE SUM Question. like "Sum of Range L to R". ==> we know Prefix Sum (to calculate Sum from L to R), 
+            Extra case:- is to "Treat even index & odd index seprately"
+               for that:- we can create EVEN Prefix Sum & Odd Prefix Sum seprately.             ********************************      
+                  Even_Prefix_Sum:-
+                              The sum where we include only even index elements.
+                            EP=[8 8 13 13 14 14 16]      // we added only even index elements. for odd index we just copy the previous element.
+                  Odd_Prefix_Sum:-
+                              The sum where we include only odd index elements.
+                            OP=[0 -3 -3 -10 -10 -6 -6]   // we added only odd index elements. for even index we just copy the previous element.
+                                 first index for odd index elements is always be 0 irrespective of the value of the element.
+                                       means it will always be 0.   
+                    Example:-
+                       Index= 0   1  2   3  4  5  6
+                           A=[8  -3  5  -7  1  4  2]  
+                          EP=[8  8  13  13 14 14 16]
+                          OP=[0 -3 -3 -10 -10 -6 -6]                        Q1  Q2   Q3   Q4                  
+                                                                   Type  -->[1   2    2   1] 
+                                                                   Left  -->[1   2    4   3]
+                                                                   Right -->[4   6    5   3]                        
+
+                          Q1:- sum of elements from index 1 to 4. & we will take even index elements only. 
+                                 index=  1  2  3  4
+                                    EP=  EP[N-1] - EP[L-1] 
+                                      = 14 - 8 = 6
+                          Q2:- sum of elements from index 2 to 6. & we will take odd index elements only.
+                                    index=  2  3  4  5  6
+                                       OP=  OP[N-1] - OP[L-1] 
+                                         = -6 - (-3) = -3
+                          Q3:- sum of elements from index 4 to 5. & we will take odd index elements only.
+                                    index=  4  5
+                                       OP=  OP[N-1] - OP[L-1] 
+                                         = -6 - (-10) = 4
+                          Q4:- sum of elements from index 3 to 3. & we will take even index elements only.
+                                    index=  3
+                                       EP=  EP[N-1] - EP[L-1] 
+                                         = 13 - 13 = 0 
+
+                  TC = O(N)    // To calculate odd & even prefix sum seprately.
+                  SC = O(N)    // To store odd & even prefix sum seprately.
+                  
+                  TC = O(1) per query.    // just subtracting two number.
+                  SC = O(1) per query.
+                  
+                  Total 
+                     TC = O(N) + O(Q) = O(N+Q)
+                     SC = O(N) + O(1) = O(N)
 ```
