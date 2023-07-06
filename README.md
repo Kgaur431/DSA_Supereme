@@ -568,6 +568,7 @@ index=   0  1  2  3   4  5  6  7
                                                       P[i] = P[i-1] + A[i]                                                                              
 ```                                                            
 ``` 
+     Reducing the TC per query.
                We are try to implement the cricet scoreboard concept in the code. to reduce the TC. 
                       A=[-6  3  2  4  5  -2  1  9]                                                    L= [1 3  0] 
                       P=[-6 -3 -1  3  8   6  7 16]  // this is score board for the above array A.     R= [4 6  5]
@@ -650,13 +651,177 @@ index=   0  1  2  3   4  5  6  7
                SC = O(1)         --->                              SC = O(N)       --->               SC = O(1)         
 ```
 ### **Prefix Sum means Left to Right. & Suffix Sum means Right to Left** 
+# Suffix Sum
+
 ``` 
         L                        R
       A=[-6  3  2  4  5  -2  1  9]
 index=    0  1  2  3  4   5  6  7      <---
 Suffix= [                       9]  // SUFFIX SUM ARRAY.
-         S[i] = SUM OF ELEMENTS FROM i th INDEX TILL END.
+         S[i] = SUM OF ELEMENTS FROM i th INDEX TILL END. || (Reverse of Prefix Sum, just add the elements from right to left.)
                   Last index will be same.
-                     Suffix= [16 22 19  17 13 8 10 9]  // SUFFIX SUM ARRAY.
-                        S[i] = S[i+1] + A[i];   
+                     Suffix= [16 22 19  17 13 8 10 9]  // SUFFIX SUM ARRAY. 
+                        total sum = 16.     // at Left side of the array.
+                        S[i] = S[i+1] + A[i]; 
+         Code:-
+               S[N-1] = A[N-1]; // last index will be same.
+               for (int i = n-2; i >= 0; i--)       // this will convert the array A like Suffix sum array S.
+               {
+                   S[i] = S[i+1] + A[i];
+               }                  
+                   TC = O(N)
+                   SC = O(1)               
+         
+        L                        R
+      A=[-6  3  2  4  5  -2  1  9]  --->
+ Prefix=[-6 -3 -1  3  8   6  7  16]  // PREFIX SUM ARRAY   
+               total sum = 16.         // at Right side of the array.                 
+                        
+                        
+                           
+```
+## Prefix Sum start from starting index & Suffix Sum start from i th index till end.
+#### Problem1:- Given an integer array of size N, find the first(smallest) equilibrium index in the array.
+``` 
+        L                     R
+      A=[-7  1  5  2  -4  3  0]
+index=    0  1  2  3  4   5  6       
+      What is Equilibrium index ?
+            it is an index where the sum of elements on the left side of it is equal to the sum of elements on the right side of it.
+               assume there is an index k.
+                  "Sum of Elements           ==          Sum of Elements
+                     from index 0 to (k-1)                  from index (k+1) to (n-1)"
+                        |                                      |
+                      Left Sum                               Right Sum
+                     
+               means finding the index such that all the elementfrom left side of it is equal to the sum of elements from right side of it.
+            we have to find the first (smallest) index. which satishfied the above. 
+            
+            Important Points:- 
+                        "If There are multiple Equilibrium indexes then we have to return the first(smallest) index."
+                        "If we consider the First index(index 0)as the Equilibrium index then the Left side sum is 0." means there is nothing on the left side of the first index.
+                        "If we consider the Last index(index N-1) as the Equilibrium index then the Right side sum is 0." means there is nothing on the right side of the last index.
+            
+      - if the equilibrium index is not present then return -1. 
+      - it its present then return the index.
+         // the below ans we got based on the input array A. till now we have not used any conepts of Prefix Sum or Suffix Sum to find the equilibrium index.
+       QUES:- is there any index which satisfied with the equilibrium index conditions ?
+         like:- index 3 has the equilibrium index.
+                  L= -7 + 1 + 5 = -1
+                  R= -4 + 3 + 0 = -1
+                     L == R
+                     so, return 3.  
+     
+         like:- if we talk about index 6
+                    L= -7 + 1 + 5 + 2 + -4 + 3 = 0    // here the sum of elements is 0.
+                    R= 0                              // becoz there is no element on the right side of index 6. so sum is 0.
+                          L == R
+                          so, return 0.  // suppose if anyone does not have bank acc & we ask him that how much money you have in your bank acc. then he will say 0.
+                                                the same thing if there is no element on the right side of index 6 then we will return 0. 
+                                                so, we have to return 0. 
+         like:-
+            index= 0  1  2   3  4   5   6 
+                A=[5  1  3  -6  5  -2  -1]
+                     L= 0     // becoz there is no element before index 0. so, sum is 0.
+                     R= 1+3-6+5-2-1 = 0
+                        L == R
+                        so, return 0.  // equilibrium index is 0.
+                        
+       Bruteforce Approach:-
+                      First index K, such that the sum(0 to k-1) == sum(k+1 to n-1). if the left range is empty then return 0. if the right range is empty then return 0.
+                          What is the sum(0 to k-1) ?
+                                            ----->
+                               P[k-1]                 // Prefix Sum of from 0 index to k-1 index.              #imp  
+                          What is the sum(k+1 to n-1) ?
+                                            <------
+                               S[k+1]                // Suffix Sum of from k+1 index to n-1 index.             #imp
+                          means we have to find the index for which P[k-1] & S[k+1] is equal.                        ****************
+            
+       Actual Problem:- 
+         k is the equilibrium index. that we are finding. 
+         there is two steps to solve the problem.
+            Step1:- Calculate the P[] & S[]. 
+                        TC = O(N + N) = O(2N) = O(N)
+                        SC = O(N + N) = O(2N) = O(N)
+            Step2:- Find the first index K such that P[k-1] == S[k+1].   // if any value that is satisfying the current condition then that is the ans. 
+                        TC = O(N)
+                        SC = O(1)
+                   
+index=    0  1  2  3  4   5  6        
+      A=[-7  1  5  2  -4  3  0] 
+      P=[-7 -6 -1  1  -3  0  3]  // Prefix Sum Array.
+      S=[ 0  7  6  1  -1  3  0]  // Suffix Sum Array.
+
+         we have to find any index k for which P[k-1] = S[k+1]. that index is 3.  
+            Total TC = O(N)
+                  SC = O(N) 
+                           here, P[k-1] of index 3 = -1
+                                 S[k+1] of index 3 = -1
+                                 P[k-1] == S[k+1]        // both are equal.
+                                 so, return 3.
+         Look:-
+               while writing the code for the above two steps, we have to take care of the corner cases 
+                     like:-
+                           k = 0;  // if the first index is the equilibrium index then the left side sum is 0.
+                             ||
+                           k = n-1; // if the last index is the equilibrium index then the right side sum is 0. 
+                           
+                     we can handle it by using if else condition.
+                         if k==0, then check S[k+1] == 0. if it is true then return 0. otherwise return -1.
+                         if k==n-1, then check P[k-1] == 0. if it is true then return 0. otherwise return -1.
+                           these two condition we are handling becoz other than this if we get any index k such that P[k-1] == S[k+1]. then that is the ans.
+                              but if we get k==0 or k==n-1 then we have to check the above two conditions.
+         
+         If we find a way to which we don't have to handle the corner cases. (using if-else conditions.)
+          
+  index=  0  1  2  3  4   5  6        
+      A=[-7  1  5  2  -4  3  0] 
+      P=[-7 -6 -1  1  -3  0  3]  // Prefix Sum Array.
+      S=[ 0  7  6  1  -1  3  0]  // Suffix Sum Array.
+      
+            Explain:- In this, we are saying index 3 is the ans. bcoz Prefix Sum till k-1 (P[K-1]) was equal to Suffix Sum from index k+1(S[k+1).
+                        if index 3 is ans then P[K-1] should be equal to S[k+1].
+                            like P[3-1] = P[2] == S[3+1] = S[4]
+                                            -1 == -1
+                        & if we add the element of array A[k] (A[3]) on both the side. then also sum of element(A[k]) should be remain equal.
+               Formula:- P[k-1] + A[k] == S[k+1] + A[k]
+                  ==>          P[k] == S[k]                 // S[K] is P[N-1] - P[K-1]  // 
+                like:-     P[2] + A[3] == S[4] + A[3]
+                                -1 + 2 == -1 + 2
+                                  1 == 1                    // we got equilbrium index.      
+                        So, we don't have to bother about the corner cases.
+                           Explain:- we are saying index 3 is the ans.then Prefix Sum till k-1 (P[K-1]) should equal to Suffix Sum from index k+1(S[k+1).   
+                                       if we add the element A[k] on both the side. then also sum should be remain equal.
+                                           suppose, there is only one way to get equilibrium index at index 0 that P[0] should be equal to S[0]          #imp
+                                                      in this case we don't have to check P[k-1] & S[k+1] becoz now, if P[k] == S[k] is equal that means we are not accessing -1 index & N+1 index.
+                                                      previously we are checking P[k-1] & S[k+1] should be equal. for that we have to handle corner cases. 
+                                                      
+            How we find the equilibrium index without using the Suffix Sum Array.
+                Suppose we don't want to calculate the suffix sum. then how we can solve the problem of find the equilibrium index.  
+                   like:- find sum of elements from index 3 to 6.    // this ques look like a range. (we solve in cricket example)
+                            P[6] - P[3-1]      
+                                                  // S[K] is P[N-1] - P[K-1] this way we can find suffix so no required to create Suffix array.
+                                                 // means sum of (total scroed till N-1) - sum of (the score before the index 3). 0 - (-1) = 1
+                                                      ans is 1. now if we check S[3], that is also 1 so we find the equilibrium index.
+                                                 
+                Now the Solution becomes:-         (we are only using prefix sum)
+   *********************************  "for all index we have to check if P[k] == P[N-1] - P[k-1]".  1 == 0-(-1) = 1           #imp    **********************************
+                                                                                 // we are checking P[k] == S[k] only but not using Suffix sum array.
+                                       now we don't want suffix sum any more. but we have to handle corner case.  (refer the finding the sum of any range from L to R  line 600.)
+                
+                Now if we only have to use Prefix sum then we don't have to actually create extra space as long as we can modify the input. 
+                              Total solution:- 
+                                    Tc = O(N)
+                                    Sc = O(1)    
+                                  Note:- "we can modify the input array to prefix array & we have to find the first index K,
+                                             where prefix sum till index k (P[k]) is same as suffix sum till index k (P[N-1] - P[k-1])"     
+                                          means in any ques if we are using prefix sum & suffix sum both then we don't have to create both 
+                                             just create prefix sum array & we can calculate the suffix sum by using the formula P[N-1] - P[k-1].           ***********************************
+           
+         
+         
+         
+         
+         
+         
 ```
