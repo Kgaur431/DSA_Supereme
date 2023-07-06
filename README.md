@@ -778,7 +778,8 @@ index=    0  1  2  3  4   5  6
       A=[-7  1  5  2  -4  3  0] 
       P=[-7 -6 -1  1  -3  0  3]  // Prefix Sum Array.
       S=[ 0  7  6  1  -1  3  0]  // Suffix Sum Array.
-      
+                                                      // K = 3, so P[2] == S[4] || P[k-1] == S[k+1] 
+                                                      // P[2] = -1 is the sum of elements from 0 to 2 index. & S[4] = -1 is the sum of elements from 6 to 4 index.  *******************************************
             Explain:- In this, we are saying index 3 is the ans. bcoz Prefix Sum till k-1 (P[K-1]) was equal to Suffix Sum from index k+1(S[k+1).
                         if index 3 is ans then P[K-1] should be equal to S[k+1].
                             like P[3-1] = P[2] == S[3+1] = S[4]
@@ -901,4 +902,21 @@ index=    0  1  2  3  4   5  6
                   Total 
                      TC = O(N) + O(Q) = O(N+Q)
                      SC = O(N) + O(1) = O(N)
+```
+
+## Conclusion:-
+``` 
+       we discussed about the Range Sum from L to R.
+             Equlibrium index is an index, for which  sum of element from index 0 to K-1 is equal to sum of element from index K+1 to N-1.
+                Prefix Sum  == Suffix Sum
+                 P[k-1]     == S[k+1]     // here, k-1 means, sum of elements from start to k-1  && k+1 means, sum of elements from end to k+1. MEANS in suffix sum we add elements from R to L. so we said end to k+1. (end is starting index for suffix sum)
+                 P[k-1] + A[k] == S[k+1]  + A[k]  // if we add A[k] in both side then it will becomes    
+                    P[k] == S[k]  
+                        now we can directly start the loop from 0 to N-1 & check if P[k] == S[k] then return k.      **********************************
+                           means if we found k == 0 or N-1 that means we are just checking the current index of Prefix Sum & Suffix Sum so no need to check corner case.   
+                 if we don't use Suffix Sum then we have to take care of corner case.
+                     if we use prefix array then we have to take care of K== 0 becoz P[k] == P[N-1] - e1]. here P[K-1] is not valid. so we have to check if K == 0 then return 0.  *****************************
+                                     
+
+
 ```
