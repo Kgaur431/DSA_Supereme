@@ -1,6 +1,7 @@
 # Compiled class file
 *.class
 
+pivotIndex.java
 # Log file
 *.log
 
@@ -9,7 +10,8 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-
+.idea/
+out/
 # Package Files #
 *.jar
 *.war
