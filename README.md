@@ -274,7 +274,7 @@
                                                                                     return ans; 
                                                                             Working:- 
                                                                                         0  1  2  3  4  5  6  7              ans   = 0   => 0+1=1 => 1+1=2   => 3+2=5
-                                                                                     S=[g  c  a  g  g  a  a  g]             count = 0 =>   1           => 2 => 3       => 4
+                                                                                     S=[g  c  a  g  g  a  a  g]             count = 0   =>   1   => 2       => 3       => 4
 
                                                                                        - we are travelling from right to left. 
                                                                                        - if(S[7] == 'g') { count = 1; } // count = 1. 
