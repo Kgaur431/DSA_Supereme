@@ -537,7 +537,7 @@ index= 0  1  2  3  4  5  6  7  8  9 10  11 12 13 14  15 16
                             A= [2  6  4  1  5  2  6  3  4  6  5  3  2  1  1]
                                 
                                 min = 1, max = 6. // first we must able to find the min & max element from the array then continue with the below part.
-                                Traversing from R to L. & checking how it will help us.
+                                Traversing from R to L. & checking how it will help us. (Now we are finding closest min & max element)
                                    "we have to find the closest min or max element on the right side" so we need to store their indexes.
                                         minId = -1 => 14 => 13 => 3
                                         maxId = -1 => 9  =>  6 => 1                                          // initially we don't have any min or max element so we are storing -1.
