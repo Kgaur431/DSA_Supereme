@@ -519,9 +519,9 @@ index= 0  1  2  3  4  5  6  7  8  9 10  11 12 13 14  15 16
                             SC = O(1) 
                     Optimisation:- 
                             Example:-
-                                            0 1 2 3 4 5 6 7 8 
+                                            0 1 2 3 4 5 6 7 8         
                                             _ _ _ _ _ _ _ _ _    
-                                                  |---------->
+                                                  |---------->            | by this symbol we are representing that the current index (it can be min or maximum), so the elements that we have to consider a which will form a pair with the current index that called closest min or max on right will be this range like |------------> means "among these elements we are finding the closest min or max"
                                                 |------------>
                                               |-------------->
                                         assume index 3 is the min or max element. then we have to check the closest min or max element on the right side. (index 4 to 8)  
