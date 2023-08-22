@@ -531,7 +531,7 @@ index= 0  1  2  3  4  5  6  7  8  9 10  11 12 13 14  15 16
                                   by checking element we can see some patterns. like we are checking some element again & again for closest min or max element on the right side.
                                       so, "for checking the closest min or max element on the right side & we don't want to repeated work then we traverse from R to L."
                         
-                                Ans:- R to L traversal.
+                                Ans:- R to L traversal. we can also do it this with L to R approach. 
                                 
                                 0  1  2  3  4  5  6  7  8  9  10 11 12 13 14
                             A= [2  6  4  1  5  2  6  3  4  6  5  3  2  1  1]
