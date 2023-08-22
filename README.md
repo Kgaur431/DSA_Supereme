@@ -538,18 +538,18 @@ index= 0  1  2  3  4  5  6  7  8  9 10  11 12 13 14  15 16
                                 
                                 min = 1, max = 6. // first we must able to find the min & max element from the array then continue with the below part.
                                 Traversing from R to L. & checking how it will help us. (Now we are finding closest min & max element)
-                                   "we have to find the closest min or max element on the right side" so we need to store their indexes.
-                                        minId = -1 => 14 => 13 => 3
-                                        maxId = -1 => 9  =>  6 => 1                                          // initially we don't have any min or max element so we are storing -1.
-                                   
+                                   "we have to find the closest min & max element on the right side for every element" so we need to store their indexes.
+                                        minId = -1 => 14 => 13       => 3
+                                        maxId = -1       => 9  =>  6     => 1                                          // initially we don't have any min or max element so we are storing -1.
+                                       
                                    Working:-
                                             at index 14, we check is the current element is min or max element. this is min element, then we check for closest max element on right side. No, so no pair will be formed. but we update minID = 14.
-                                            at index 13, we check is the current element is min or max element. this is min element, then we check for closest max element on right side. No, so no pair will be formed. but we update minID = 13.
+                                            at index 13, we check is the current element is min or max element. this is min element, then we check for closest max element on right side. No, so no pair will be formed(becoz at right, we have min element & we want max element). but we update minID = 13.
                                             at index 12, we check is the current element is min or max element. No, so no pair will be formed. go to next element.
                                             at index 11, we check is the current element is min or max element. No, so no pair will be formed. go to next element.
                                             at index 10, we check is the current element is min or max element. No, so no pair will be formed. go to next element.
                                             at index 9, we check is the current element is min or max element. this is max element, then we check for closest min element on right side. that is 13. so we find the pair(9 to 13).
-                                                    13-9+1= 5 length subarray.
+                                                    13-9+1= 5 length subarray. // we can say for elment on left side index 9 will act as the index for nearest max element  
                                             at index 8, we check is the current element is min or max element. No, so no pair will be formed. go to next element.
                                             at index 7, we check is the current element is min or max element. No, so no pair will be formed. go to next element.
                                             at index 6, we check is the current element is min or max element. this is max element, then we check for closest min element on right side. that is 13. so we find the pair(6, 13)
@@ -561,28 +561,34 @@ index= 0  1  2  3  4  5  6  7  8  9 10  11 12 13 14  15 16
                                             at index 2, we check is the current element is min or max element. No, so no pair will be formed. go to next element.
                                             at index 1, we check is the current element is min or max element. this is max element, then we check for closest min element on right side. that is 3. so we find the pair(1,3)
                                                     3-1+1= 3 length subarray.
-                                            at index 0, we check is the current element is min or max element. No, so no pair will be formed. go to next element.     
+                                            at index 0, we check is the current element is min or max element. No, so no pair will be formed. go to next element.
+                                                            length
+                                                            (9,13) ==> 13-9+1 = 5.
+                                                            (6,13) ==> 13-6+1 = 8.
+                                                            (3,6)  ==> 6-3+1  = 4.
+                                                            (1,3)  ==> 3-1+1  = 3.    //minimum length of subarray is 3.
                                         
                                         Ans:- 3
                                         TC = O(N)
                                         SC = O(1) 
-                                            here we are carry forward these two element minId & maxId.
+                                            here we are carry forward these two element minId & maxId.        *************************
                             Code:-
                              ans = N;       // initially ans is complete array length we are taking.  
                              minId = -1;
                              maxId = -1;
                              
-                                code to calcuate the minE & maxE. (in O(N) TC) 
+                             write a code to calcuate the minArrayElement(minE) & maxArrayElement(maxE) of the array. done (in O(N) TC)
+
                              for( i --> N-1 to 0)
                                   if(A[i] == minE) 
                                   {
-                                        minId = i;
+                                        minId = i;                  // we have to update the minId
                                         if(maxId != -1)             // we are checking that valid maxId should be availabe at right side of the element.
                                             ans = min(ans, maxId - minId +1);       // current element is min so max element is on right side
                                   }
                                   if(A[i] == maxE)
                                   {
-                                    maxId = i;
+                                    maxId = i;                                    // we have to update the maxId
                                     if(minId != -1)
                                         ans = min(ans, minId-maxId+1)              // current element is max so min element is on right side   
                                   }
