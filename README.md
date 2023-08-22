@@ -598,8 +598,19 @@ index= 0  1  2  3  4  5  6  7  8  9 10  11 12 13 14  15 16
                                            if current element is minE then "right side the higher index will be max"
                                            if current element is maxE then "right side the higher index will be min"
                                            
-                                           this code will will work if all elements are same.
-                                           this will work when only one element is present. 
+                                            this code will will work if all elements are same. (img 1)
+                                                Case:-
+                                                        array [8 8 8 8 8], when all elements are same, minId & maxId are -1, then (if A[i] == minE will work) but the else if part will not work.
+                                                       (see the old code) then minId will get update but maxId will not update(becoz we wrote the other condition in else-if), if maxId will remain -1 through out the code then it will not calculate the ans. so the old code won't work then we can change else if to if only. or write if condiion after finding minE & maxE
+
+                                            this will work when only one element is present. (img 2)
+                                              initially minId & maxId are -1. then we calculated min & maxE that is equal to 10
+                                                then i is 0 (only 1 element in the array)
+                                                then if(A[i] ==minE) will work & minId is equal to 0 (means maxId = 0)
+                                                then if(maxId != -1) does not work till now.
+                                                then if(A[i] == maxId) will work & maxId is equal to 0
+                                                then if(minId != -1) will work
+                                                    & then it will update the ans
                                             
 
 
@@ -633,6 +644,7 @@ index= 0  1  2  3  4  5  6  7  8  9 10  11 12 13 14  15 16
 1. if we have to calculate the ans from **current index to till n-1 or right hand side** then we should choose R to L.  => suffix part
 2. if we have to calculate the ans from **start to current index** then we should choose L to R. => prefix part
 
-
+1. link 1:- [all elements are same](https://drive.google.com/file/d/1IbNpfOKRurrtz4_OlhbyfLju-FCRKPGk/view?usp=drive_link)
+2. link 2:- [1 elements](https://drive.google.com/file/d/1XQoo3sc7VSSCqrTaZzLlQ8I01YYELUhR/view?usp=drive_link)
               
                
