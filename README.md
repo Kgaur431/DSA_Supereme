@@ -478,7 +478,7 @@
 **If any element of array/matrix etc. is contributing multiple times in the ans, then 
 ans = Σ Contribution of all elements (we write like this majority times)** 
 
-The Main idea of this technique is **If there is any situtation, in which one element is being used multiple times in the ans, then 
+The Main idea of this technique is **If there is any situation, in which one element is being used multiple times in the ans, then 
 for every element find the contribution & add to get the answer**
 ``` 
         A = [8  6  5]                      O/p
@@ -549,13 +549,214 @@ for every element find the contribution & add to get the answer**
                 
                 Ans:-   22.
 
+                Ques:-  What is the best TC & SC for this ques.
+                Ans :-  
+                
+                        BruteForce Approach:-
+                                    "For all sub arrays of length k, 
+                                     Travel to calculate sum & 
+                                     Keep track of Maximum".
+                                     
+                   How to Think ?
+                    Step1:-   we have to first see "How many sub arrays will be there" so that we can calculate the sum of all the sub arrays & find 
+                           the ans.
+                              so, first we have to do step 1.
+                                 
+                                 -  if  we talk about starting index. Starting Indexes of sub arrays can be What ?
+                                        we can Start sub array from index:- 0 1 2 3.
+                                        if we start sub array from index 4 then it can't be length 3.
+                                        if we start sub array from index 5 then it can't be length 3.
+                                        
+                                        so Starting Index of the Range = [0,3]
+                                 
+                                 -if we talk about Ending Index. Ending Indexes of sub arrays can be What ?
+                                        we can End sub array at index:-  2 3 4 5.
+                                        if we start sub array from 0 then end at index 2.
+                                        if we start sub array from 1 then end at index 3.
+                                        if we start sub array from 2 then end at index 4.
+                                        if we start sub array from 3 then end at index 5.
+                                            
+                                            so, Ending Index of the Range = [2,5]
+                                     
+                              Now, if we know either the Range of Starting Indexes & Ending Indexes. We can find Total No. of Sub arrays.       *********************
+                                    Range of Starting Index [0,3]  :-  [R-L+1] =   3-0+1    =   4
+                                    Range of Ending Index   [2,5]  :-  [R-L+1] =   5-2+1    =   4  
+                                    
+                                        Total No. of Start & Total no. of End, do anything, becoz both of them will give Total No. of Sub arrays.
+                                        so, either we can focus on Finding the Range of Starting Index or we can Focus on Ending Index. (any one of them we can do).
+                                        
+                                        
+                                         lets, go with ending Index. 
+                                            first, we find out Maximum Ending Index:-
+                                                    Ques:- What is the value of Maximum index we can have ?
+                                                    Ans :- it will be (N-1)
+                                                           Means, a sub array can end at last index of the array.  
+                                                           like,
+                                                                 if we start sub array from index 3 then it will end at index 5. 
+                                                                 
+                                                    Ques:-  What is the Minimum value of Ending Index from where Ending Index can Start ?
+                                                    Ans :-  If the starting index of sub array is 0. that time we will definately have minimum value of 
+                                                            ending index. 
+                                                            Now,
+                                                                Ques:-  If we starting from 0 then till which index you will get K elements ? 
+                                                                Ans :-  so, if we start from index 0, then till k-1  index we will get k elements.
+                                                                            like, 
+                                                                                start index =   0
+                                                                                k = 3, so (k-1) = 2  
+                                                                                therefor, the minmum ending index will be 2. & at index 2 we got k element.
+                                                                                
+                                                                        A[0],A[1],A[2],......,A[k-1] till here, these are the First kth elements.
+                                                                        so the minimum ending will be k-1.   
+                                                    
+                                                    Result:-    End
+                                                            ==> Max Index = (N-1) 
+                                                            ==> Min Index = (K-1)                   
+                                                                           
+                                                            
+                                        Now, we talk about Starting Index.
+                                            first, we find out Minimum Starting Index:-
+                                                    Ques:- What is the value of Minimum Starting Index we can have ?
+                                                    Ans :- it will be 0.
+                                                           Means, we can start from index 0.
+                                                           
+                                                    Ques:- What is the value of Maximum Starting Index we can have ?
+                                                    Ans :- it will be N-k.      (me said, just refer line 408)
+                                                             basically,
+                                                                    A[N-k], A[N-k+1], A[N-k+2],....,A[N-1] these are last k elements.
+                                                    
+                                                    Result:-    Start
+                                                            ==> Min Index = 0 
+                                                            ==> Max Index = (N-K)
 
-
-
-
-
-
-
+                              Now, no. of sub arrays of length = k. what will be the value ?
+                                     Case1:-    Ending Index.
+                                                min:- if we start from index A[0],A[1],A[2],......,A[k-1] means k elements         k-1  (Left)
+                                                max:-  end at last index                                                           N-1  (Right)
+                                                so,     (N-1) - (k-1) + 1   =    N-k+1
+                                                                ||
+                                     Case2:-    Starting Index.
+                                                min:- starting index =  0           (Left)
+                                                max:- ending index   =  (N-k)       (Right)
+                                                so,     (N-k) - 0 + 1 =  N-k+1
+                                     
+                                     these are the total no. of sub arrays of length k is = N-k+1. this is the bruteforce way.
+                    Bruteforce Code:-
+                        
+                            ans = integer.Min   // read about this. minimum integer value, it is -2^31 (means smallest value that int data type can store)
+                            for i --> 0 to N-k  // starting index           Starting positions that we have
+                              {  sum = 0
+                                    for j --> i to (i+k-1)  // ending index going from i, so i+0, i+1, i+2 .... i+k-1. here, the complete length we have to travel                       {like for k --> 0 to k-1
+                                        { sum += A[j] }                                                                                                                                       ending index will be  j = i + k. }
+                                ans = max(ans, sum)         // max fun to calculate the max of ans var || sum var.
+                              }
+                            return ans. 
+                            
+                                Ques:-  Why we don't have written 0 here ans = (integer.Min)
+                                Ans :-  No, becoz
+                                        assume input like this.
+                                           A = [-8  -6  -5  -7  -10  -2]         k=3
+                                                 0   1   2   3   4    5  
+                                                 if all the elements are negative, so every sub array sum become negative.
+                                                 therefore if we initialise the ans var as 0. then it will never changes its value,
+                                                            it will always remain 0 (whatever we can add in 0, it will be 0 only na). 
+                                                            so we have to make ans var as int min,
+                                
+                                
+                                Finding TC & SC.
+                                    how many starting positions we have.:-      N-k+1 
+                                    how many iteration that j loop having:-     k       // size of the sub array.
+                                    so, 
+                                        what is the TC
+                            TC =    O((N-k+1)*k) =  O(N*k)      // Worst case TC
+                            SC =    O(1)
+                            
+                                
+                            
+                                Myths:-
+                                    not everytime seeing two loop is O(N^2) TC. so "We need to check what are the iteration going on".
+                                    if k is 0. means length of the sub array is 0 (means no sub array). so if k=2. means we are looking for sub array length 2.
+                                    so if k = N then we are looking at N size length  sub array.
+                                        in that case we have only 1 sub array.
+                                        so, its never be a O(N^2) 
+                                            O((N-k+1)*k) =  O(N*k)
+                                            O((N-N+1)*N) =  O(N)
+                                            Therefore if k become bigger then this is ((N-k+1)) becoming smaller.
+                                                      if k become smaller then this is ((N-k+1)) becoming bigger.
+                                               TC =    O((N-k+1)*k) =  O(N*k)
+                                                        this TC is in Worst case scanerio only. it can be less than that beocz (N-k+1) * k.
+                                                            so ignoring small case k+1. we get N*k.
+                                
+                                
+                                    this code is just iterating over all the sub array & calculating the maximum sum
+                    Prefix Sum:-
+                            Home work, we can solve this ques using prefix sum to reduce the TC.
+                                here, skipped it. i have to solve it.
+```
+## Sliding Window
+Sliding window is nothing but **a Subarray of Fixed Length**
+``` 
+        A = [8  6  5  7  10  2]         k=3
+             0  1  2  3  4   5
+   
+           -    Just Shifting this window One step on the Right.  
+                    like,
+                                {8 6 5}     = 19
+                                {6 5 7}     = 18
+                                {5 7 10}    = 22
+                                {7 10 2}    = 19
+                                assume these are the window's.
+                                we are just shifting the window from {8 6 5} to {6 5 7} One step on the Right.
+           -    If we have the sum of length = 3, from index 0 to 2 like {8 6 5} & the sum is 19.
+                    if we want to calculate the sum of this {6 5 7},
+                    Then, Instead of Travelling everything can we do like this:-
+                        "Total Sum + New Element that we have in the Window - the Element that we have removed from the Window = We Get the Ans" **************************************
+                             19    +                     7                  -               8                                  =    18
+                             {6 5 7} sum is 18.   
+                    Ques:-  How it happened ?
+                    Ans :-  we have Removed One window on the Right that Increases one Element in the window & Removes one element from the window.
+                    Example:-
+                            If we want to find the sum for this window {5 7 10}, then
+                                here, we are including 10 in our window & removing 6 from our window.
+                                18 + 10 - 6 = 22. 
+                    Conclusion:-
+                                "If we have the previous sum then we just have to add a element & remove a element".
+           -    if we say "sub array is starting from index i then ending index of sub array is i+(3-1) means i+(k-1)             ************************Important**************
+                      
+                                   i      i+(3-1)                       // means,  starting index is 2 so ending index is 2+(3-1) =  2 to 4. this is actually that we want.
+                        A = [8  6  5  7  10  2]         k=3
+                             0  1  2  3  4   5  
+                                                    Start = i
+                                                    End   = i+(k-1)
+                                                    so whenever we caluclating the ans of this sub array from this Start to this end 
+                                                     i   i+(3-1)
+                                                    {5 7 10}
+                                                     OLD SUM + Array at the New Ending Position - Element which is Removed  =   Ans(this is the total of new sub array sum) ***********VERY IMPOTANT*************
+                                                     old sum + A[i+k-1] - A[i-1]   =    Ans
+           -    Code:-  
+                        Step1:- we need to find the first sub array sum. 
+                        
+                        sum = 0 
+                        for i --> 0 to (k-1)    // travel the first sub array   
+                            {sum += A[i]}       // sum of first sub array                             
+                        ans = sum               // now, ans is currently first sum.                                 
+                        for i --> 1 to N-k      // for every new starting position that is from index 1 to last starting postion means (the last sub array starting index is, N-k like 6-3=3 so from index 4 sub array can't created)
+                            {sum = sum + A[i+k-1] - A[i-1]  // update the value of sum. this is calculating the new sub array sum starting from index 1 to lenght k.
+                             ans = max(ans, sum)}// finding max becoz we are finding maximum sub array sum.
+                        return ans.
+                        
+                                first for loop is calculating the sum of first sub array of length k.
+                                second for loop is calculating the other sub array sum using the previous sum.
+                                
+                        TC = O(N)
+                        SC = O(1)
+                        
+                            Why O(N) ?
+                                first for loop is iterating k times.
+                                second for loop is iterating N-k times.
+                                
+                                total no. of iteration is = (k + N - k)
+                                    so, O(N)
+                                      
 
 
 
