@@ -70,7 +70,7 @@
                      a = 2      // first term
                      r = 3      // common ratio
     SO --> a + a*r + a*r*r + a*r*r*r + a*r*r*r*r + .... 
-    ANS --> because we have multiplied r to a second term so we have to divide it from Nth term.
+    ANS --> because we have multiplied r to a second term so we have to subtract it from Nth term.
     N^th TERM -->        a*(r^n - 1) 
     SERIES --> a, a*r, a*r*r, a*r*r*r, a*r*r*r*r, ...., a*(r^n - 1)
                             ||
