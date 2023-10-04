@@ -42,8 +42,8 @@
                     REVERSE THE SERIES
                     ADD BOTH THE SERIES
     LIKE -->
-              S= a + (a + d) + (a + 2d) + (a + 3d) .... +  a + (n-2)d + a + (n-1)d. 
-              S= a+(n-1)d + a+(n-2)d + a+(n-3)d + a+(n-4)d .... + (a+d) + a.
+              S= a        + (a + d)  + (a + 2d) + (a + 3d) .... +  a + (n-2)d + a + (n-1)d. 
+              S= a+(n-1)d + a+(n-2)d + a+(n-3)d + a+(n-4)d .... + (a+d)       + a.
              ------------------------------------------------------------------------------------
               2S = 2a + (n-1)d + 2a + (n-1)d + 2a + (n-1)d + 2a + (n-1)d .... + 2a + (n-1)d + 2a.       // this will repeat N times. 
     SO -->           2S = N(2a + (n-1)d)    
