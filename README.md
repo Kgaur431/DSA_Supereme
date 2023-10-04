@@ -30,7 +30,7 @@
         d = 3 
         SO --> a + (a + d) + (a + 2d) + (a + 3d) .... + a + (n-1)d.
         QUES --> WHY a + (n-1)d ?                                                // ==> Nth term = a + (n-1)d
-        ANS --> because we have added d to a second term so we have to subtract it from Nth term.        
+        ANS --> because we have added d to a second term so we have to devide it from Nth term.        
 ```
 4. WHAT IS THE SUM OF FIRST N TERM OF ARITHMETIC PROGRESSION. 
 ```
