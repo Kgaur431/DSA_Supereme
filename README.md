@@ -55,7 +55,7 @@
 
                     SO --> if gaurav want to see the output he can't see if his machine taking 317 years to execute the code. so the code for count() function is not useful. 
 
-## FASTER THE THINGS,  BETTER THE THINGS. {POWER OF THINKING, FINDING THE PATTERNS} `` ``````     
+## FASTER THE THINKS,  BETTER THE THINKS. {POWER OF THINKING, FINDING THE PATTERNS} `` ``````     
 
         1.2  WHY WE NEED OPTIMISATION ?  
             ANS --> Optimising the code means, ** converting the same piece of code into something which will gives exact same result but faster means, takes LESS NUMBER OF ITERATIONS. **
