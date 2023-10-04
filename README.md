@@ -163,8 +163,8 @@
                   GAUS'S FORMULA --> 5050 = 100 * 101 / 2
                   QUES --> HOW GAUS'S OBSERVED? 
                   OBSERVATION --> HOW TO FIND THE NATURAL NUMBERS
-                  EG --> S = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + ........+ 98+ 99 + 100 
-                         S = 100 + 99 + 98 + 97 + 96 + 95 + 94 + 93 + 92 + 91 + ........+ 3 + 2 + 1     // GAUS'S wrote the number in reverse order
+                  EG --> S = 1   + 2  + 3  + 4  + 5  + 6  + 7  + 8  + 9  + 10 + ........+ 98 + 99 + 100 
+                         S = 100 + 99 + 98 + 97 + 96 + 95 + 94 + 93 + 92 + 91 + ........+ 3  + 2  + 1     // GAUS'S wrote the number in reverse order
                          ----------------------------------------------------------------------------
                          2s = 101 + 101 + 101 + ............. + 101 + 101 + 101 ==> 100 times           //  100 times he added 101
                                   2s = 101 * 100 = 10100
