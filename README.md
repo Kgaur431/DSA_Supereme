@@ -266,7 +266,27 @@ conditions:-
                            END. 
                  4. result of observation we reduce the no. of iteration. 
                         like if we have 4 elements then we are checking 4*4 = 16 pairs. 
-                        but after observation we are checking only 6 pairs. 
+                        but after observation we are checking only 6 pairs.
+
+                       {
+                        suppose we choose (i<j)
+                           this below part:-
+                                                (2,3)
+                                          (1,2) (1,3)
+                                    (0,1) (0,2) (0,3)
+
+                           so j will start from i+1 & run till N-1
+
+                        Code:-
+                               for (int i = 0; i < A.length-1; i++)
+                                    {
+                                       for (int j = i+1; j < A.length-1; j++)
+                                          {
+                                             if (A[i] + A[j] == K )
+                                                return true;
+                                          }
+                                    }
+                       }   // updated by Me based on my undestanding about this topic (not video part)
                         
            Code:-  suppose we choose (i>j)
                            // go through the above matrix & check the condition where i > j.
