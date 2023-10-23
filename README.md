@@ -216,24 +216,237 @@
 ### String Builder
 ``` 
      String builder is nothing but an "Dynamic array of characters".
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```
+### Problem Statement 
 
+#### Given a String S. toggle the case of every Character. do not use inbuilt fun. (means all we have to do is convert lower to upper case & vice versa)
+``` 
+        "a B c d E" -->  "A b C D e"
+ How to Think ?
+    -   do we know the ASCII values. (check above)
+    -   if we see the ASCII values (img8) then we got to know that we have to convert a ==> A, b ==> B, vice versa. 
+    -   now if we check the difference of the ASCII values, & the difference between of every char is 32. 
+    -   now, if we have given small letters & "We Subtract 32 from small latters" to get the Capital letters. see(img9)
+                                ||
+             if we have given capital letters & "We Add 32 to capital letters" to get the Small letters. see(img9)
+    -   Steps to do this task.
+        
+        =   we travel from 0 to (N-1), where N-1 is the length of the string.
+                 for i --> 0 to (N-1)
+        =   we have to know "weather the char has small or capital"
+        =   I have to know the i th char has the lower case or upper case char. 
+                do we really know that, from where upper & lower case start & all. (img9)
+                No,   
+                if (S[i] >= 'a' && S[i] <= 'z')     // when we compare char then it always checks the ASCII values. so we don't have to remember the ASCII values.
+                    {
+                      S[i] -= 32                   // now we have to subtract 32 from the i th ASCII value.
+                    }
+                else  if (S[i] >= 'A' && S[i] <= 'Z')
+                    {
+                      S[i] += 32                   // now we have to add 32 to the i th ASCII value.
+                    }
+                    
+        =      for knowing weahter string is upper or lower we don't need to remember the ASCII values. (see in if & else if check).
+                but in the program we need to remember about the 32 to convert. let say we frogort this 32 number || difference between the ASCII values.
+                Ques:-  Is there any way to find out the Difference ? Can we still find the solution. 
+                Ans :-  'a' - 'A'   // 97 - 65 = 32
+                let say we also forgot that 'a' has large value & 'A' has small value. Can we still find the solution.
+                    abs('A' - 'a'). we just need to take absolute value of either 'A' - 'a' or 'a' - 'A', it will definately work.
+                still we have to remember one thing like "Weather we have to subtract or add" that info still we have to remember.
+                let say we forgot that also. then, 
+                    we write this & remember all the above things.
+                        if('a' > 'A') then  lower to upper case, like 97 > 65, if yes then it means we have smaller value & now we have to convert into upper case.
+                            so we have to subtraction.
+                        vice versa.
+                    see (img10) 
+```
+## Facts!!
+``` 
+Obs 1:-
+        we are taking about ASCII values from a to z (lower case)
+            a   -->     97
+            b   -->     98
+            .
+            .
+            .
+            z   -->     122
+             
+            now, we observe carefully.
+                if we have 8 bit number  like this,                                _  _  _  _  _  _  _  _        (it is binary)
+                                                                                   7  6  5  4  3  2  1  0
+                & if we look at the int 97 to 122
+                   we can find the pattern for the 6th bit of these int. what is the comment on the 6th bit of these integers ? || for these numbers (97 to 122) can we comment anything about the 6th bit of these integers.
+                   6th bit always be the 1.
+                   becoz, if we see carefully then we got to know that "every number is 64 < num < 128 (in 97 to 122) 
+                   so, "we can say that 6th bit will always be set to 1". see (img 11)
+                
+                Now, we want to 5th bit.
+                if we select all these numbers (97 to 122) & subtract 64 (now 64 bit has set to 1).
+                    so, we write like this. see (img 12)
+                            97 - 64 = 33
+                            98 - 64 = 34
+                            .
+                            .
+                            122 - 64 = 58
+                        if we see carefully then we got to know that "every number is 32 < num < 64 (in 33 to 58)
+                        so we can say that 5th bit also set to 1. see (img 12)
+                    
+                the 5th bit is important. we will use this bit. see (img 13)
+        we are taking about ASCII values from A to Z (upper case)
+            A   -->     65
+            B   -->     66
+            .
+            .
+            Z   -->     90
+           now, we observe carefully.
+              if we have 8 bit number  like this,                                _  _  _  _  _  _  _  _        (it is binary)
+                                                                                 7  6  5  4  3  2  1  0
+              Can we comment again on the 6th bit ?
+                all these numbers (65 to 90) are 64 < num < 128
+                so 6th bit always be the 1.                   
+              Can we comment again on the 5th bit ?
+                5th bit always be 0.
+                becoz if sw subtract 64 from these numbers (65 to 90) then
+                    65 - 64 = 1
+                    66 - 64 = 2
+                    .
+                    .
+                    90 - 64 = 26
+                the range will be from 1 to 26 &  if we see carefully then we got to know that "every number is less then 32 (in 1 to 26) see (img 14)
+                so we can say that 5th bit also set to 0. see (img 14)
+        
+        Summary:-
+                from the ASCII value a to z --> the 5th bit is set to 1. becoz, num starts from (97 to 122) is like (64 < num < 128) so 6th bit = 1. same nums starts from (33 to 58) is like (32 < num < 64) so 5th bit = 1.
+                from the ASCII value A to Z --> the 5th bit is set to 0. becoz, num starts from (65 to 90) is like (64 < num < 128) so 6th bit = 1. same nums starts from ( 1 to 26) is like (less then 32 so we not count 5th bit) so 5th bit = 0.
+    
+   Obs 2:-
+        look at any number a --> 97
+        Ques:-  What is the 8 bit binary representation of the 97 ?              
+        Ans :-  
+                
+                         7  6  5  4  3  2  1  0
+         a --> 97 -->    0  1  1  0  0  0  0  1
+         A --> 65 -->    0  1  0  0  0  0  0  1
+         
+            if we look at carefully then we get to know that "Only 5th bit is changed".
+            
+         z --> 122 -->    0  1  1  1  1  0  1  0
+         Z --> 90  -->    0  1  0  1  1  0  1  0
+            here, also only 5th bit is different.
+        
+        Ques:-  Why we observing only 5th bit. || why only 5th bit is diff ?
+        Ans :-  becoz "difference in the ASCII values is of 32", which is nothing but 2^5.      ******************************************
+                so, if we have to convert z to Z, a to A, b to B ... so on.
+                "we just have to toggle  5th bit". see (img 15)                                 **********************************************
+    
+        Ques:-  How to toggle 5th bit ?
+        Ans :-  We simply do ^32 (XOR 32) operation || ^(1<<5) (means, XOR(1 left shift 5))
+        
+                so, if we take any ith char of Str[i] & toggle the 5th bit of i.
+                    s[i] ^=32   // performing XOR of 32 on ith char (^32) see (img 16)
+                that's why "We are using Bitwise operator in String Ques"
+        
+ Conclusion:-
+                if we have to convert "Lower Case to Upper Case" Simply do XOR operation. so no need to remember anything just do XOR of 32.          
+```
+## Need To Know 
+``` 
+            Update the String
+            
+         if we code in C++ like lang's, where the String by nature is Mutuable(changable) then what is the TC it will take for "updating the every ith char of the string". see (img 16)
+            it will take Linear TC. O(N)
+            SC = O(1)
+            
+         if the strings are Immutable(Not Changable) like Java. in that case we want Linear time not more then that. then what is the way to do in linear time. 
+            "Convert String to Char Array || String Builder". TC = O(N) 
+            but in that case we need extra space so, SC = O(N) see (img 17)
+                here, if we try to update the existing string then it will gona create new string so if we want to update the existing string then we need to convert it.
+```
+#### Given a string with lower case characters. (a to z) sort in dictionary order (Alphabetic order)
+```         
+            String      -->          O/p
+            "utkarsh"   -->         "ahkrstu"
+            "vinit"     -->         "iintv" 
+
+            we can use sorting algorithms. then TC will be O(N log(N)) 
+            "but if we know that there are only 26 unique chars, so can we find out the better solution then sorting algos".
+            
+           Hint:-
+                -   26 char is the constant time.
+                -   utilise Time
+                -   utilise Space    
+          
+          s = "d a b d b e d a" 
+          
+          think like:-
+            alphabetic order is like this:-
+                a______ b_____ c______ d______ ... z______      (means all the a, all the b, all the c & so on)
+                freq(a) freq(b) freq(c) ... so on.              (use case of  frequnecy.) see (img 18)
+            if we know the "frequency of a" so we can first create all the a, if we know the "frequency of b" then we can append all the b to a,
+             if we know the "frequency of c" then we can append all the c to b. (use case of  frequnecy.)
+             means, if we have only 26 unique chars then "can we have the 26 size array to store the frequency" 
+                       we can create one frequency array which is of length 26. see (img 19)
+                       Ques:-   How do we know that "at which index represents which character". 
+                       Ans :-   means if we want to store a, b, c, d .... till z. ideally the array look like this. see (img 19)
+                                Is there any way to map the Char a to 0, b to 1, c to 2, ... so on. 
+                                    Yes, 
+                                    if we simply do like this. 
+                                        char - ASCII value of a 
+                                         'a'  -  97     = 0                  see (img 20)
+                                         'b'  -  97     = 1 
+                                                ... so on.
+                                Do we really need to remember the ASCII value of a. || if we forgot this value 97. then, 
+                                     we simply do like this. 
+                                        'a'  -  'a'     = 0                  see (img 21)
+             Code:-
+                    for i --> 0 to (N-1)     // i start from 0 till complete string length.
+                        F[s[i] - 'a'] += 1           //  see (img 20) these two lines used to store the Frequency of every char. like  'a'  -  'a'     = 0      (we subtracting to get index)  
+                        
+                        
+                        TC = O(N)
+                        SC = O(26) = O(1)   // The frequency array is not linear space, its just 26 char space means constant space. it does not mean that we are creating n length array. 
+                            
+                            
+                    once we have frequency array then all we need to do is "travel every ASCII" 
+                    for i --> 0 to 25       // travel every char. 
+                        char c = (char) (i + 'a')   // we are generate the char from index. we just need to adding the ASCII value to the index. (we have index & we want char) (we adding to get char) 
+                        // now we have to desicde that How many time i have to print this char.  
+                        for j --> 1 to F[i]
+                            print (c)
+                    
+                    see (img 22)
+                    
+                       TC = O(N^2)  --> NO
+                       TC = O(26 * N) -->  NO 
+                            Total no. of times the j loop is working is how much ?
+                                it is nothing but freq(a) + freq(b) + freq(c) ... and so on. 
+                                then, what is the sum of freq of all the char.
+                                it is nothing but length of string N.
+                       TC = O(N)    // means, the no. of iteration is not N for every char. for every char we are not running N times, we are running just the freq of that char.  
+                       SC = O(1) 
+                    
+                    Ques:-  like if i at index 3 but how do i know d=3.
+                    Ans :-  3 + 'a' = 100. 
+                            100 is the ASCII value of d. 
+             
+             
+             DRY RUN:-
+                            i   |         j        |   #iteration 
+                     -----------|------------------|-------------------------
+                           0    |   1 to F[o]      |        F['a']
+                           1    |   1 to F[1]      |        F['b']
+                           .    |                  |
+                           .    |                  |    
+                           25   |   1 to F[25]     |        F['z']
+                                |                  |    -------------------
+                                                        sum of Freq = length of string = O(N)
+                                                        
+             THIS ABOVE SORTING ALGO WE HAVE DISCUSSED IS KNOWN AS count sort.
+             
+                count sort has own Limitation like "can we have the freq array of very large length"
+                    No, here we have only 26 length unique char so in that case Count sort has possible.
+                    suppose if we have 10^9 unique value then we can't create the freq array.
+                    becoz it will give memory too high error. 
+             
+```
+## Count sort is working when we have Limited set of unique values.
