@@ -215,7 +215,7 @@
 ```
 ### String Builder
 ``` 
-     String builder is nothing but an "Dynamic array of characters".
+     String builder is nothing but an "Dynamic array of characters".    ||  "Array List of the Characters".
 ```
 ### Problem Statement 
 
@@ -440,6 +440,28 @@ Obs 1:-
                            25   |   1 to F[25]     |        F['z']
                                 |                  |    -------------------
                                                         sum of Freq = length of string = O(N)
+                            
+                                       We are Creating Freq Array, Travelling String & Increasing the Frequency.               
+                     In the first loop, for the char d, we update the the index 3 = 1. 
+                        then for char a, then we update the index 0 = 1.
+                          for char b, then we update the index 1 = 1.
+                          for char d, then we again update the index 3 = 2.
+                          for char b, then we again update the index 1 = 2.
+                          for char e, then we update the index 4 = 1.
+                          for char d, then we again update the index 3 = 3.
+                          & for char d, then we again update the index 0 = 2.
+                        everything else by default its 0.   see (img 23)
+                                        
+                                        We will Travel the freq array & we will print the char with the no. of times the frequency is there.
+                     In the Second Loop, the char a has frequency 2 times so we print a two times. 
+                        then we print b two times.
+                        we don't print c.
+                        we print d three times.
+                        we print e one times.
+                        
+                        Result = a a b b d d d e
+                    
+                            
                                                         
              THIS ABOVE SORTING ALGO WE HAVE DISCUSSED IS KNOWN AS count sort.
              
@@ -449,4 +471,4 @@ Obs 1:-
                     becoz it will give memory too high error. 
              
 ```
-## Count sort is working when we have Limited set of unique values.
+## Count sort is working when we have a Limited set of unique values.
